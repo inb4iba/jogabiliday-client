@@ -10,12 +10,12 @@ export const Titlebar = ({ title, icon }: Props): JSX.Element => {
   const isMaximized = false //update to state after
 
   return (
-    <header className="flex justify-between bg-zinc-800 text-zinc-100">
+    <header className="draggable flex justify-between bg-zinc-800 text-zinc-100">
       <div className="flex items-center gap-2 px-3">
         {icon && <span>{icon}</span>}
         <span>{title}</span>
       </div>
-      <div className="flex">
+      <div className="flex non-draggable">
         <button className="flex items-center justify-center w-8 p-1 transition-all duration-150 cursor-default aspect-square bg-zinc-800 hover:bg-zinc-700">
           <LuMinus />
         </button>

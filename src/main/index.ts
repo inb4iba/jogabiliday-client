@@ -8,11 +8,12 @@ function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
+    frame: false,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/main.js'),
       sandbox: false
     }
   })
