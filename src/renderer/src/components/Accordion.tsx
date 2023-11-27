@@ -20,7 +20,7 @@ export const Accordion = (props: Props): JSX.Element => {
           {isOpen ? <LuChevronUp /> : <LuChevronDown />}
         </button>
       </header>
-      {isOpen && <section className="p-2">{props.children}</section>}
+      {isOpen && <section className="pt-2 flex flex-col gap-2">{props.children}</section>}
     </article>
   )
 }
