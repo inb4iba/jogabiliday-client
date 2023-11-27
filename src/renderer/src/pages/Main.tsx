@@ -1,4 +1,5 @@
 import { Accordion } from '@renderer/components/Accordion'
+import { Button } from '@renderer/components/Button'
 import { JSX } from 'react'
 
 export const Main = (): JSX.Element => {
@@ -8,17 +9,23 @@ export const Main = (): JSX.Element => {
         <Accordion title="Sites">
           <>
             <h2>Orelo</h2>
-            <div>
-              <button>Abrir janela</button>
+            <div className="flex">
+              <Button className="flex-grow">
+                <span>Abrir Janela</span>
+              </Button>
             </div>
             <h2>Tipa Ai</h2>
-            <div>
-              <button>Abrir janela</button>
+            <div className="flex">
+              <Button className="flex-grow">
+                <span>Abrir Janela</span>
+              </Button>
             </div>
           </>
         </Accordion>
         <Accordion title="Metas">
-          <h2>Metas</h2>
+          <Button>
+            <span>Adicionar Meta</span>
+          </Button>
         </Accordion>
         <Accordion title="Configurações">
           <h2>Configurações</h2>

@@ -1,5 +1,6 @@
 import { JSX, useState } from 'react'
 import { LuChevronDown, LuChevronUp } from 'react-icons/lu'
+import { Button } from './Button'
 
 type Props = {
   title: string
@@ -13,12 +14,9 @@ export const Accordion = (props: Props): JSX.Element => {
     <article>
       <header className="flex justify-between">
         <h3 className="text-teal-300">{props.title}</h3>
-        <button
-          className="w-8 aspect-square rounded-md flex items-center justify-center hover:text-teal-300 transition-colors bg-inherit hover:bg-zinc-700"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <Button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <LuChevronUp /> : <LuChevronDown />}
-        </button>
+        </Button>
       </header>
       {isOpen && <section className="pt-2 flex flex-col gap-2">{props.children}</section>}
     </article>
