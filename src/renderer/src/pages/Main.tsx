@@ -1,5 +1,6 @@
 import { Accordion } from '@renderer/components/Accordion'
 import { Button } from '@renderer/components/Button'
+import { GoalsSection } from '@renderer/components/sections/GoalsSection'
 import { JSX } from 'react'
 
 export const Main = (): JSX.Element => {
@@ -23,9 +24,7 @@ export const Main = (): JSX.Element => {
           </>
         </Accordion>
         <Accordion title="Metas">
-          <Button>
-            <span>Adicionar Meta</span>
-          </Button>
+          <GoalsSection />
         </Accordion>
         <Accordion title="Configurações">
           <h2>Configurações</h2>
