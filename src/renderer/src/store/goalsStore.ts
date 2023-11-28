@@ -9,6 +9,7 @@ type State = {
 type Action = {
   addGoal: () => void
   updateGoal: (goal: Goal) => void
+  deleteGoal: (id: number) => void
 }
 
 export const useGoalsStore = create<State & Action>()(
@@ -27,6 +28,11 @@ export const useGoalsStore = create<State & Action>()(
           if (idx !== goal.id) return g
           return goal
         })
+      }),
+    deleteGoal: (id) =>
+      set((state) => {
+        const goals: Goal[] = [...state.goals]
+        state.goals = goals.filter((g) => g.id !== id)
       })
   }))
 )

@@ -1,8 +1,11 @@
 import { JSX, useRef } from 'react'
+import { Button } from './Button'
+import { LuTrash2 } from 'react-icons/lu'
 
 type Props = {
   goal: Goal
   onUpdate: (goal: Goal) => void
+  onDelete: (id: number) => void
 }
 
 export type Goal = {
@@ -11,16 +14,20 @@ export type Goal = {
   value?: number
 }
 
-export const Goal = ({ goal, onUpdate: save }: Props): JSX.Element => {
+export const Goal = ({ goal, onUpdate, onDelete }: Props): JSX.Element => {
   const titleRef = useRef<HTMLInputElement>(null)
   const valueRef = useRef<HTMLInputElement>(null)
 
   const saveGoal = (): void => {
-    save({
+    onUpdate({
       id: goal.id,
       title: titleRef.current?.value,
       value: valueRef.current?.value ? +valueRef.current.value : undefined
     })
+  }
+
+  const deleteGoal = (): void => {
+    onDelete(goal.id)
   }
 
   return (
@@ -41,6 +48,9 @@ export const Goal = ({ goal, onUpdate: save }: Props): JSX.Element => {
         onChange={saveGoal}
         ref={valueRef}
       />
+      <Button className="hover:bg-red-600" onClick={deleteGoal}>
+        <LuTrash2 />
+      </Button>
     </div>
   )
 }
