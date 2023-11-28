@@ -7,7 +7,7 @@ import { initializeTitlebarHandler } from './ipcHandlers/titlebar'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 480,
     height: 670,
     frame: false,
     show: false,
