@@ -13,12 +13,12 @@ export const Accordion = (props: Props): JSX.Element => {
   return (
     <article>
       <header className="flex justify-between">
-        <h3 className="text-teal-300">{props.title}</h3>
+        <h2 className="font-medium text-teal-300 underline ">{props.title}</h2>
         <Button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <LuChevronUp /> : <LuChevronDown />}
         </Button>
       </header>
-      {isOpen && <section className="pt-2 flex flex-col gap-2">{props.children}</section>}
+      {isOpen && <section className="flex flex-col gap-2 pt-2">{props.children}</section>}
     </article>
   )
 }
