@@ -1,5 +1,6 @@
 import { Accordion } from '@renderer/components/Accordion'
 import { Separator } from '@renderer/components/Separator'
+import { ConfigSection } from '@renderer/components/sections/ConfigSection'
 import { GoalsSection } from '@renderer/components/sections/GoalsSection'
 import { ScrapingSection } from '@renderer/components/sections/ScrapingSection'
 import { JSX } from 'react'
@@ -17,10 +18,9 @@ export const Main = (): JSX.Element => {
         </Accordion>
         <Separator />
         <Accordion title="Configurações">
-          <h4>Configurações</h4>
+          <ConfigSection />
         </Accordion>
       </div>
-      <h1>Ipsum</h1>
     </main>
   )
 }
