@@ -1,6 +1,7 @@
 import { shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { initializeTitlebarHandler } from '../ipcHandlers/titlebar'
+import { is } from '@electron-toolkit/utils'
 
 let oreloWindow: BrowserWindow
 
@@ -26,6 +27,11 @@ const createWindow = (): void => {
     }
   })
 
+  oreloWindow.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url)
+    return { action: 'allow' }
+  })
+
   oreloWindow.on('ready-to-show', () => {
     oreloWindow.show()
   })
@@ -35,7 +41,9 @@ const createWindow = (): void => {
     return { action: 'deny' }
   })
 
-  oreloWindow.loadURL('http://orelo.cc')
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    oreloWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/orelo')
+  }
 
   initializeTitlebarHandler(oreloWindow)
 }
