@@ -6,4 +6,8 @@ interface Window {
     close: () => void
     onResizeWindow: (callback: () => void) => void
   }
+
+  scrapingApi: {
+    openOrelo: () => void
+  }
 }

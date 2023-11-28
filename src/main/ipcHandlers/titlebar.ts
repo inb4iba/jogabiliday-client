@@ -18,5 +18,4 @@ export const initializeTitlebarHandler = (window: BrowserWindow): void => {
   window.on('unmaximize', () => {
     window.webContents.send('resize_window')
   })
-  console.log('titlebar handler initialized')
 }
