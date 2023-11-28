@@ -1,22 +1,12 @@
 import { Button } from '../Button'
-import { JSX, useState } from 'react'
+import { JSX } from 'react'
 import { Goal } from '../Goal'
+import { useGoalsStore } from '@renderer/store/goalsStore'
 
 export const GoalsSection = (): JSX.Element => {
-  const [goals, setGoals] = useState<Goal[]>([])
-
-  const addGoal = (): void => {
-    setGoals([...goals, { id: goals.length }])
-  }
-
-  const updateGoal = (goal: Goal): void => {
-    setGoals(
-      goals.map((g, idx) => {
-        if (idx !== goal.id) return g
-        return goal
-      })
-    )
-  }
+  const goals = useGoalsStore((state) => state.goals)
+  const addGoal = useGoalsStore((state) => state.addGoal)
+  const updateGoal = useGoalsStore((state) => state.updateGoal)
 
   return (
     <section className="flex flex-col gap-2">

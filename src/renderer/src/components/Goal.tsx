@@ -26,7 +26,7 @@ export const Goal = ({ goal, onUpdate: save }: Props): JSX.Element => {
   return (
     <div className="flex gap-2">
       <input
-        className="flex-grow p-2 bg-zinc-900 rounded-md"
+        className="flex-grow p-2 rounded-md bg-zinc-900"
         type="text"
         placeholder="Título"
         value={goal.title}
@@ -34,7 +34,7 @@ export const Goal = ({ goal, onUpdate: save }: Props): JSX.Element => {
         ref={titleRef}
       />
       <input
-        className="w-1/5 p-2 bg-zinc-900 rounded-md"
+        className="w-1/5 p-2 rounded-md bg-zinc-900"
         type="text"
         placeholder="Valor"
         value={goal.value}
