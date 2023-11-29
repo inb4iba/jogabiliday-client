@@ -1,6 +1,7 @@
-import { BrowserWindow, shell } from 'electron'
+import { BrowserWindow } from 'electron'
 import { join } from 'path'
 import { initializeTitlebarHandler } from '../ipcHandlers/titlebar'
+import { is } from '@electron-toolkit/utils'
 
 let oreloWindow: BrowserWindow
 
@@ -19,6 +20,7 @@ const createWindow = async (): Promise<void> => {
     height: 670,
     show: false,
     autoHideMenuBar: true,
+    frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/orelo.js'),
       sandbox: false
@@ -29,30 +31,13 @@ const createWindow = async (): Promise<void> => {
     oreloWindow.show()
   })
 
-  oreloWindow.webContents.setWindowOpenHandler((details) => {
-    console.log('details', details)
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    oreloWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/orelo')
+  } else {
+    oreloWindow.loadFile(join(__dirname, '../renderer/index.html'))
+  }
 
-    const authWindow = new BrowserWindow({
-      width: 900,
-      height: 670,
-      autoHideMenuBar: true,
-      webPreferences: {
-        preload: join(__dirname, '../preload/orelo.js'),
-        sandbox: false
-      }
-    })
-
-    authWindow.on('close', () => {
-      console.log('auth', authWindow.webContents.getURL())
-      oreloWindow.loadURL(authWindow.webContents.getURL())
-    })
-
-    shell.openExternal(details.url)
-    authWindow.loadURL(details.url)
-    return { action: 'deny' }
-  })
-
-  oreloWindow.loadURL('https://orelo.cc')
+  // oreloWindow.loadURL('http://orelo.cc')
 
   initializeTitlebarHandler(oreloWindow)
 }
