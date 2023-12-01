@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron'
+import { BrowserView, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { initializeTitlebarHandler } from '../ipcHandlers/titlebar'
 import { is } from '@electron-toolkit/utils'
@@ -26,6 +26,12 @@ const createWindow = async (): Promise<void> => {
       sandbox: false
     }
   })
+
+  const view = new BrowserView()
+  oreloWindow.setBrowserView(view)
+  view.setBounds({ x: 0, y: 40, width: 900, height: 630 })
+  view.setAutoResize({ width: true, height: true })
+  view.webContents.loadURL('https://orelo.cc')
 
   oreloWindow.on('ready-to-show', async () => {
     oreloWindow.show()
