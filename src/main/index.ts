@@ -34,7 +34,7 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  initializeTitlebarHandler(mainWindow)
+  initializeTitlebarHandler(mainWindow, 'MAIN')
   initializeScrapingHandler()
 }
 

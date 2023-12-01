@@ -50,5 +50,5 @@ const createWindow = async (): Promise<void> => {
     oreloWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  initializeTitlebarHandler(oreloWindow)
+  initializeTitlebarHandler(oreloWindow, 'ORELO')
 }
