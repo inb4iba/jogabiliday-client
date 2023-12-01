@@ -10,8 +10,6 @@ export const openOrelo = (): void => {
     createWindow()
     return
   }
-
-  console.log('orelo')
 }
 
 const createWindow = async (): Promise<void> => {
@@ -31,7 +29,16 @@ const createWindow = async (): Promise<void> => {
   oreloWindow.setBrowserView(view)
   view.setBounds({ x: 0, y: 40, width: 900, height: 630 })
   view.setAutoResize({ width: true, height: true })
-  view.webContents.loadURL('https://orelo.cc')
+  await view.webContents.loadURL('https://orelo.cc/')
+  // await view.webContents.loadURL(`https://orelo.cc/podcast/${id}/metricas`)
+  view.webContents.executeJavaScript(`
+    setTimeout(() => {
+      const cards = [...document.querySelectorAll('.MuiCard-root')]
+      const [contributors, value] = cards.filter(card =>
+        card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
+        card.children[1].textContent)
+    }, 10000)
+  `)
 
   oreloWindow.on('ready-to-show', async () => {
     oreloWindow.show()
@@ -42,8 +49,6 @@ const createWindow = async (): Promise<void> => {
   } else {
     oreloWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
-
-  // oreloWindow.loadURL('http://orelo.cc')
 
   initializeTitlebarHandler(oreloWindow)
 }
