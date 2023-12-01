@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './assets/index.css'
 import { App } from './App'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Orelo } from './pages/Orelo'
+import { External } from './pages/External'
 
 const router = createBrowserRouter([
   {
@@ -11,8 +11,8 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: '/orelo',
-    element: <Orelo />
+    path: '/external',
+    element: <External />
   }
 ])
 

@@ -38,7 +38,7 @@ const createWindow = async (): Promise<void> => {
   })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    oreloWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/orelo')
+    oreloWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/external')
   } else {
     oreloWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
