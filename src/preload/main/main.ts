@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron'
 
-export const scrapingApi = {
+export const mainApi = {
   openOrelo: (): void => ipcRenderer.send('open_orelo')
 }

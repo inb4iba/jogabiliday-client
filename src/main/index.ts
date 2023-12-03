@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { initializeWindowHandler } from './ipcHandlers/window'
-import { initializeScrapingHandler } from './ipcHandlers/scraping'
+import { initializeMainHandler } from './ipcHandlers/main'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -35,7 +35,7 @@ function createWindow(): void {
   }
 
   initializeWindowHandler(mainWindow, 'MAIN')
-  initializeScrapingHandler()
+  initializeMainHandler()
 }
 
 app.whenReady().then(() => {

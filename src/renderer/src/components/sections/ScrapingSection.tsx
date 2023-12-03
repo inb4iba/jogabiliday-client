@@ -6,7 +6,7 @@ export const ScrapingSection = (): JSX.Element => {
     <section>
       <h4>Orelo</h4>
       <div className="flex">
-        <Button className="flex-grow" onClick={window.scrapingApi.openOrelo}>
+        <Button className="flex-grow" onClick={window.mainApi.openOrelo}>
           <span>Abrir Janela</span>
         </Button>
       </div>

@@ -7,7 +7,7 @@ interface Window {
     onResizeWindow: (callback: () => void) => void
   }
 
-  scrapingApi: {
+  mainApi: {
     openOrelo: () => void
   }
 }

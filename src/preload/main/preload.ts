@@ -1,10 +1,10 @@
 import { contextBridge } from 'electron'
 import { windowApi } from '../shared/titlebar'
-import { scrapingApi } from './scraping'
+import { mainApi } from './main'
 
 try {
   contextBridge.exposeInMainWorld('titlebarApi', windowApi('MAIN'))
-  contextBridge.exposeInMainWorld('scrapingApi', scrapingApi)
+  contextBridge.exposeInMainWorld('mainApi', mainApi)
 } catch (error) {
   console.error(error)
 }
