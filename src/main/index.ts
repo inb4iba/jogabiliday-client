@@ -7,6 +7,7 @@ import { initializeMainHandler } from './ipcHandlers/main'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
+    title: 'Jogabiliday Client',
     width: 480,
     height: 670,
     frame: false,

@@ -14,6 +14,7 @@ export const openOrelo = (): void => {
 
 const createWindow = async (): Promise<void> => {
   oreloWindow = new BrowserWindow({
+    title: 'Orelo',
     width: 900,
     height: 670,
     show: false,
