@@ -1,5 +1,5 @@
 interface Window {
-  titlebarApi: {
+  windowApi: {
     minimize: () => void
     maximize: () => void
     restore: () => void

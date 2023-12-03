@@ -1,6 +1,6 @@
 import { BrowserView, BrowserWindow } from 'electron'
 import { join } from 'path'
-import { initializeTitlebarHandler } from '../ipcHandlers/titlebar'
+import { initializeWindowHandler } from '../ipcHandlers/window'
 import { is } from '@electron-toolkit/utils'
 
 let oreloWindow: BrowserWindow
@@ -50,5 +50,5 @@ const createWindow = async (): Promise<void> => {
     oreloWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  initializeTitlebarHandler(oreloWindow, 'ORELO')
+  initializeWindowHandler(oreloWindow, 'ORELO')
 }

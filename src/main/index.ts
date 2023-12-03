@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { initializeTitlebarHandler } from './ipcHandlers/titlebar'
+import { initializeWindowHandler } from './ipcHandlers/window'
 import { initializeScrapingHandler } from './ipcHandlers/scraping'
 
 function createWindow(): void {
@@ -34,7 +34,7 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  initializeTitlebarHandler(mainWindow, 'MAIN')
+  initializeWindowHandler(mainWindow, 'MAIN')
   initializeScrapingHandler()
 }
 

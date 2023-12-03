@@ -10,15 +10,15 @@ export const Titlebar = ({ title, icon }: Props): JSX.Element => {
   const [isMaximized, setIsMaximized] = useState(false)
 
   useEffect(() => {
-    window.titlebarApi.onResizeWindow(() => setIsMaximized(!isMaximized))
+    window.windowApi.onResizeWindow(() => setIsMaximized(!isMaximized))
   }, [isMaximized])
 
-  const handleMinimizeBtn = (): void => window.titlebarApi.minimize()
+  const handleMinimizeBtn = (): void => window.windowApi.minimize()
 
   const handleMaximizeBtn = (): void =>
-    isMaximized ? window.titlebarApi.restore() : window.titlebarApi.maximize()
+    isMaximized ? window.windowApi.restore() : window.windowApi.maximize()
 
-  const handleCloseBtn = (): void => window.titlebarApi.close()
+  const handleCloseBtn = (): void => window.windowApi.close()
 
   return (
     <header className="relative z-10 flex justify-between shadow-lg draggable bg-zinc-800 text-zinc-100">

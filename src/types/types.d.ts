@@ -1,6 +1,6 @@
 export type WindowTitle = 'MAIN' | 'ORELO' | 'TIPA'
 
-export type TitlebarApi = {
+export type WindowApi = {
   minimize: () => void
   maximize: () => void
   restore: () => void
