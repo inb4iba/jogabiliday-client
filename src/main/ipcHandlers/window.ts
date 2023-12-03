@@ -1,7 +1,10 @@
 import { BrowserWindow, ipcMain } from 'electron'
 import { WindowTitle } from '../../types/types'
 
-export const initializeWindowHandler = (window: BrowserWindow, title: WindowTitle): void => {
+export const initializeWindowHandler = (
+  window: BrowserWindow,
+  title: WindowTitle
+): (() => void) => {
   ipcMain.on('minimize_window', (_e, data) => {
     if (title === data) window.minimize()
   })
@@ -27,4 +30,8 @@ export const initializeWindowHandler = (window: BrowserWindow, title: WindowTitl
   window.on('unmaximize', () => {
     window.webContents.send('resize_window')
   })
+
+  return (): void => {
+    window.removeAllListeners()
+  }
 }

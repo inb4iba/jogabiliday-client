@@ -9,5 +9,8 @@ interface Window {
 
   mainApi: {
     openOrelo: () => void
+    closeOrelo: () => void
+    showOrelo: () => void
+    hideOrelo: () => void
   }
 }

@@ -3,13 +3,23 @@ import { join } from 'path'
 import { initializeWindowHandler } from '../ipcHandlers/window'
 import { is } from '@electron-toolkit/utils'
 
-let oreloWindow: BrowserWindow
+let oreloWindow: BrowserWindow | undefined
+let removeListeners: () => void | undefined
 
 export const openOrelo = (): void => {
-  if (!oreloWindow) {
-    createWindow()
-    return
-  }
+  if (!oreloWindow) createWindow()
+}
+
+export const closeOrelo = (): void => {
+  if (oreloWindow) oreloWindow.close()
+}
+
+export const showOrelo = (): void => {
+  if (oreloWindow) oreloWindow.show()
+}
+
+export const hideOrelo = (): void => {
+  if (oreloWindow) oreloWindow.hide()
 }
 
 const createWindow = async (): Promise<void> => {
@@ -42,7 +52,12 @@ const createWindow = async (): Promise<void> => {
   `)
 
   oreloWindow.on('ready-to-show', async () => {
-    oreloWindow.show()
+    if (oreloWindow) oreloWindow.show()
+  })
+
+  oreloWindow.on('close', async () => {
+    removeListeners()
+    oreloWindow = undefined
   })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -51,5 +66,5 @@ const createWindow = async (): Promise<void> => {
     oreloWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  initializeWindowHandler(oreloWindow, 'ORELO')
+  removeListeners = initializeWindowHandler(oreloWindow, 'ORELO')
 }
