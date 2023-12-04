@@ -1,6 +1,7 @@
 import { Accordion } from '@renderer/components/Accordion'
 import { Button } from '@renderer/components/Button'
 import { Separator } from '@renderer/components/Separator'
+import { Spinner } from '@renderer/components/Spinner'
 import { ConfigSection } from '@renderer/components/sections/ConfigSection'
 import { GoalsSection } from '@renderer/components/sections/GoalsSection'
 import { ScrapingSection } from '@renderer/components/sections/ScrapingSection'
@@ -45,12 +46,9 @@ export const Main = (): JSX.Element => {
       </div>
       <div className="flex pb-8">
         <Button
-          className={`flex-grow ${
-            serverBtn === 'STOPPED'
-              ? 'bg-teal-300 hover:bg-teal-400 text-zinc-800'
-              : serverBtn === 'RUNNING'
-                ? 'bg-red-600 hover:bg-red-500'
-                : 'disabled text-zinc-400 bg-zinc-700 hover:bg-zinc-700 cursor-default'
+          className="flex justify-center flex-grow"
+          color={`${
+            serverBtn === 'STOPPED' ? 'teal' : serverBtn === 'RUNNING' ? 'red' : 'disabled'
           }`}
           onClick={
             serverBtn === 'STOPPED' ? startServer : serverBtn === 'RUNNING' ? stopServer : undefined
@@ -62,7 +60,7 @@ export const Main = (): JSX.Element => {
             ) : serverBtn === 'STOPPED' ? (
               'Iniciar captura de dados'
             ) : (
-              <>a</>
+              <Spinner />
             )}
           </span>
         </Button>
