@@ -6,27 +6,22 @@ export const initializeWindowHandler = (
   window: BrowserWindow,
   title: WindowTitle
 ): (() => void) => {
-  ipcMain.on('minimize_window', (_e, data) => {
-    if (title === data) window.minimize()
-  })
-  ipcMain.on('maximize_window', (_e, data) => {
-    if (title === data) window.maximize()
-  })
-  ipcMain.on('restore_window', (_e, data) => {
-    if (title === data) window.restore()
-  })
-  ipcMain.on('close_window', (_e, data) => {
-    if (title === data) window.close()
-  })
-  ipcMain.on('hide_window', (_e, data) => {
-    if (title === data) {
-      window.hide()
-      sendHideWindow(title)
-    }
-  })
-  ipcMain.on('show_window', (_e, data) => {
-    if (title === data) window.show()
-  })
+  const minimize = (): void => window.minimize()
+  const maximize = (): void => window.maximize()
+  const restore = (): void => window.restore()
+  const close = (): void => window.close()
+  const show = (): void => window.show()
+  const hide = (): void => {
+    window.hide()
+    sendHideWindow(title)
+  }
+
+  ipcMain.on(`minimize_window:${title}`, minimize)
+  ipcMain.on(`maximize_window:${title}`, maximize)
+  ipcMain.on(`restore_window:${title}`, restore)
+  ipcMain.on(`close_window:${title}`, close)
+  ipcMain.on(`hide_window:${title}`, hide)
+  ipcMain.on(`show_window:${title}`, show)
 
   window.on('maximize', () => {
     window.webContents.send('resize_window')
@@ -37,5 +32,11 @@ export const initializeWindowHandler = (
 
   return (): void => {
     window.removeAllListeners()
+    ipcMain.removeListener(`minimize_window:${title}`, minimize)
+    ipcMain.removeListener(`maximize_window:${title}`, maximize)
+    ipcMain.removeListener(`restore_window:${title}`, restore)
+    ipcMain.removeListener(`close_window:${title}`, close)
+    ipcMain.removeListener(`hide_window:${title}`, hide)
+    ipcMain.removeListener(`show_window:${title}`, show)
   }
 }
