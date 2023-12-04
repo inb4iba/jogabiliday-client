@@ -2,6 +2,7 @@ import { BrowserView, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { initializeWindowHandler } from '../ipcHandlers/window'
 import { is } from '@electron-toolkit/utils'
+import { sleep } from '../utils/sleep'
 
 let oreloWindow: BrowserWindow | undefined
 let removeListeners: () => void | undefined
@@ -20,6 +21,24 @@ export const showOrelo = (): void => {
 
 export const hideOrelo = (): void => {
   if (oreloWindow) oreloWindow.hide()
+}
+
+export const startScraping = async (id: string): Promise<void> => {
+  if (!oreloWindow) throw new Error('Janela da Orelo não está aberta')
+  if (!id) throw new Error('O ID da Orelo precisa estar preenchido')
+  const view = oreloWindow.getBrowserView()
+  if (!view) throw new Error('Ocorreu um erro na Orelo')
+  await view.webContents.loadURL(`https://orelo.cc/podcast/${id}/metricas`)
+  await sleep(2000)
+  if (view.webContents.getURL().includes('error')) throw new Error('ID da Orelo inválido')
+  // view.webContents.executeJavaScript(`
+  //   setTimeout(() => {
+  //     const cards = [...document.querySelectorAll('.MuiCard-root')]
+  //     const [contributors, value] = cards.filter(card =>
+  //       card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
+  //       card.children[1].textContent)
+  //   }, 10000)
+  // `)
 }
 
 const createWindow = async (): Promise<void> => {
@@ -41,15 +60,6 @@ const createWindow = async (): Promise<void> => {
   view.setBounds({ x: 0, y: 40, width: 900, height: 630 })
   view.setAutoResize({ width: true, height: true })
   await view.webContents.loadURL('https://orelo.cc/')
-  // await view.webContents.loadURL(`https://orelo.cc/podcast/${id}/metricas`)
-  view.webContents.executeJavaScript(`
-    setTimeout(() => {
-      const cards = [...document.querySelectorAll('.MuiCard-root')]
-      const [contributors, value] = cards.filter(card =>
-        card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
-        card.children[1].textContent)
-    }, 10000)
-  `)
 
   oreloWindow.on('ready-to-show', async () => {
     if (oreloWindow) oreloWindow.show()

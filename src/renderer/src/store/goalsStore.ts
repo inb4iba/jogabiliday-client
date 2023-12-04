@@ -15,13 +15,13 @@ type Action = {
 export const useGoalsStore = create<State & Action>()(
   immer((set) => ({
     goals: [],
-    addGoal: () =>
+    addGoal: (): void =>
       set((state) => {
         const goals: Goal[] = [...state.goals]
         goals.push({ id: state.goals.length })
         state.goals = goals
       }),
-    updateGoal: (goal) =>
+    updateGoal: (goal): void =>
       set((state) => {
         const goals: Goal[] = [...state.goals]
         state.goals = goals.map((g, idx) => {
@@ -29,7 +29,7 @@ export const useGoalsStore = create<State & Action>()(
           return goal
         })
       }),
-    deleteGoal: (id) =>
+    deleteGoal: (id): void =>
       set((state) => {
         const goals: Goal[] = [...state.goals]
         state.goals = goals.filter((g) => g.id !== id)

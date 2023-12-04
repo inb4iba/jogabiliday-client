@@ -5,6 +5,7 @@ import { Spinner } from '@renderer/components/Spinner'
 import { ConfigSection } from '@renderer/components/sections/ConfigSection'
 import { GoalsSection } from '@renderer/components/sections/GoalsSection'
 import { ScrapingSection } from '@renderer/components/sections/ScrapingSection'
+import { useOreloStore } from '@renderer/store/oreloStore'
 import { JSX, useState } from 'react'
 
 export const Main = (): JSX.Element => {
@@ -12,14 +13,18 @@ export const Main = (): JSX.Element => {
   const [serverBtn, setServerBtn] = useState<
     'STOPPED' | 'RUNNING' | 'CONNECTING' | 'DISCONNECTING'
   >('STOPPED')
+  const oreloId = useOreloStore((state) => state.id)
 
   const startServer = async (): Promise<void> => {
     setServerBtn('CONNECTING')
     setStatus('Iniciando servidor...')
-    const res = await window.mainApi.startServer()
-    if (res === 'connected') {
+    const res = await window.mainApi.startServer({ oreloId })
+    if (res.type === 'data') {
       setServerBtn('RUNNING')
       setStatus('Servidor rodando')
+    } else {
+      setServerBtn('STOPPED')
+      if (res.data) setStatus(res.data.message)
     }
   }
 

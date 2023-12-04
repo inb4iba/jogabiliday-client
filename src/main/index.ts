@@ -4,7 +4,8 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { initializeWindowHandler } from './ipcHandlers/window'
 import { initializeMainHandler } from './ipcHandlers/main'
-import { WindowTitle } from './types/types'
+import { Data, WindowTitle } from './types/types'
+import { startScraping } from './scrapingWindows/orelo'
 
 let mainWindow: BrowserWindow
 
@@ -12,12 +13,14 @@ export const sendHideWindow = (title: WindowTitle): void => {
   mainWindow.webContents.send(`on_${title.toLowerCase()}_hide`)
 }
 
-export const startServer = async (): Promise<string> => {
-  return new Promise<string>((res) => {
-    setTimeout(() => {
-      res('connected')
-    }, 3000)
-  })
+export const startServer = async (oreloId: string): Promise<Data> => {
+  try {
+    await startScraping(oreloId)
+    return { type: 'data', data: { message: 'connected' } }
+  } catch (error) {
+    if (error instanceof Error) return { type: 'error', data: { message: error.message } }
+    return { type: 'error' }
+  }
 }
 
 export const stopServer = async (): Promise<string> => {

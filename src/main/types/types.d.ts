@@ -7,3 +7,10 @@ export type WindowApi = {
   close: () => void
   onResizeWindow: (callback: () => void) => void
 }
+
+export type Data = {
+  type: 'data' | 'error'
+  data?: {
+    message: string
+  }
+}

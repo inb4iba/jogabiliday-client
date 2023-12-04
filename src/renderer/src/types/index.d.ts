@@ -1,3 +1,10 @@
+type Data = {
+  type: 'data' | 'error'
+  data?: {
+    message: string
+  }
+}
+
 interface Window {
   windowApi: {
     minimize: () => void
@@ -13,7 +20,7 @@ interface Window {
     showOrelo: () => void
     hideOrelo: () => void
     onOreloHide: (callback: () => void) => void
-    startServer: () => Promise<string>
+    startServer: ({ oreloId: string }) => Promise<Data>
     stopServer: () => Promise<string>
   }
 }

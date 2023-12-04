@@ -1,6 +1,7 @@
 import { JSX, useEffect, useRef, useState } from 'react'
 import { Button } from './Button'
 import { Input } from './Input'
+import { useOreloStore } from '@renderer/store/oreloStore'
 
 type Props = {
   title: string
@@ -11,6 +12,7 @@ type Props = {
 export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRunningOnBackground, setIsRunningOnBackground] = useState(false)
+  const setId = useOreloStore((state) => state.setId)
   const idInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.
   }
 
   const onIdInputChange = (): void => {
-    console.log(idInputRef.current?.value)
+    if (idInputRef.current) setId(idInputRef.current.value)
   }
 
   return (
@@ -60,7 +62,7 @@ export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.
           <span>{defineButtonText()}</span>
         </Button>
         {isOpen && (
-          <Button className="px-4 transition-colors w-fit hover:bg-red-600" onClick={closeHandler}>
+          <Button className="px-4 transition-colors w-fit" color="red" onClick={closeHandler}>
             <span>Fechar janela</span>
           </Button>
         )}

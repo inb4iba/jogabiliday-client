@@ -3,7 +3,7 @@ import { JSX } from 'react'
 type Props = {
   children: JSX.Element
   className?: string
-  color: 'neutral' | 'teal' | 'red' | 'disabled'
+  color?: 'neutral' | 'teal' | 'red' | 'disabled'
   onClick?: () => void
 }
 
