@@ -1,14 +1,17 @@
-import { JSX, useEffect, useState } from 'react'
+import { JSX, useEffect, useRef, useState } from 'react'
 import { Button } from './Button'
+import { Input } from './Input'
 
 type Props = {
   title: string
   eventsName: string
+  hasIdInput?: boolean
 }
 
-export const WindowController = ({ title, eventsName }: Props): JSX.Element => {
+export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRunningOnBackground, setIsRunningOnBackground] = useState(false)
+  const idInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     window.mainApi.onOreloHide(() => {
@@ -45,6 +48,10 @@ export const WindowController = ({ title, eventsName }: Props): JSX.Element => {
     setIsRunningOnBackground(false)
   }
 
+  const onIdInputChange = (): void => {
+    console.log(idInputRef.current?.value)
+  }
+
   return (
     <div className="flex flex-col gap-1">
       <h4>{title}</h4>
@@ -58,6 +65,7 @@ export const WindowController = ({ title, eventsName }: Props): JSX.Element => {
           </Button>
         )}
       </div>
+      {hasIdInput && <Input placeholder="ID" idRef={idInputRef} onChange={onIdInputChange} />}
     </div>
   )
 }
