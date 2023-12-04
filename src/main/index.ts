@@ -12,6 +12,22 @@ export const sendHideWindow = (title: WindowTitle): void => {
   mainWindow.webContents.send(`on_${title.toLowerCase()}_hide`)
 }
 
+export const startServer = async (): Promise<string> => {
+  return new Promise<string>((res) => {
+    setTimeout(() => {
+      res('connected')
+    }, 3000)
+  })
+}
+
+export const stopServer = async (): Promise<string> => {
+  return new Promise<string>((res) => {
+    setTimeout(() => {
+      res('disconnected')
+    }, 3000)
+  })
+}
+
 function createWindow(): void {
   mainWindow = new BrowserWindow({
     title: 'Jogabiliday Client',

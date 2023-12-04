@@ -13,7 +13,7 @@ interface Window {
     showOrelo: () => void
     hideOrelo: () => void
     onOreloHide: (callback: () => void) => void
-    startServer: () => void
-    stopServer: () => void
+    startServer: () => Promise<string>
+    stopServer: () => Promise<string>
   }
 }

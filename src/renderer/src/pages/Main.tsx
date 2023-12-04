@@ -5,7 +5,7 @@ import { Spinner } from '@renderer/components/Spinner'
 import { ConfigSection } from '@renderer/components/sections/ConfigSection'
 import { GoalsSection } from '@renderer/components/sections/GoalsSection'
 import { ScrapingSection } from '@renderer/components/sections/ScrapingSection'
-import { JSX, useEffect, useState } from 'react'
+import { JSX, useState } from 'react'
 
 export const Main = (): JSX.Element => {
   const [status, setStatus] = useState('Servidor parado')
@@ -13,20 +13,24 @@ export const Main = (): JSX.Element => {
     'STOPPED' | 'RUNNING' | 'CONNECTING' | 'DISCONNECTING'
   >('STOPPED')
 
-  useEffect(() => {
-    // add connection and disconnection handler
-  }, [])
-
-  const startServer = (): void => {
-    window.mainApi.startServer()
+  const startServer = async (): Promise<void> => {
     setServerBtn('CONNECTING')
     setStatus('Iniciando servidor...')
+    const res = await window.mainApi.startServer()
+    if (res === 'connected') {
+      setServerBtn('RUNNING')
+      setStatus('Servidor rodando')
+    }
   }
 
-  const stopServer = (): void => {
-    window.mainApi.stopServer()
+  const stopServer = async (): Promise<void> => {
     setServerBtn('DISCONNECTING')
     setStatus('Parando servidor...')
+    const res = await window.mainApi.stopServer()
+    if (res === 'disconnected') {
+      setServerBtn('STOPPED')
+      setStatus('Servidor parado')
+    }
   }
 
   return (

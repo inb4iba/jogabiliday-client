@@ -8,6 +8,6 @@ export const mainApi = {
   onOreloHide: (callback: () => void): IpcRenderer => {
     return ipcRenderer.on('on_orelo_hide', callback)
   },
-  startServer: (): void => console.log('starting server'),
-  stopServer: (): void => console.log('stoping server')
+  startServer: (): Promise<string> => ipcRenderer.invoke('start_server'),
+  stopServer: (): Promise<string> => ipcRenderer.invoke('stop_server')
 }
