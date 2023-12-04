@@ -7,5 +7,7 @@ export const mainApi = {
   hideOrelo: (): void => ipcRenderer.send('hide_orelo'),
   onOreloHide: (callback: () => void): IpcRenderer => {
     return ipcRenderer.on('on_orelo_hide', callback)
-  }
+  },
+  startServer: (): void => console.log('starting server'),
+  stopServer: (): void => console.log('stoping server')
 }
