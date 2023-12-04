@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain } from 'electron'
-import { WindowTitle } from '../../types/types'
+import { sendHideWindow } from '..'
+import { WindowTitle } from '../types/types'
 
 export const initializeWindowHandler = (
   window: BrowserWindow,
@@ -18,7 +19,10 @@ export const initializeWindowHandler = (
     if (title === data) window.close()
   })
   ipcMain.on('hide_window', (_e, data) => {
-    if (title === data) window.hide()
+    if (title === data) {
+      window.hide()
+      sendHideWindow(title)
+    }
   })
   ipcMain.on('show_window', (_e, data) => {
     if (title === data) window.show()

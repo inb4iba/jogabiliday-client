@@ -1,4 +1,4 @@
-import { JSX, useState } from 'react'
+import { JSX, useEffect, useState } from 'react'
 import { Button } from './Button'
 
 type Props = {
@@ -6,9 +6,17 @@ type Props = {
   eventsName: string
 }
 
-export const WindowController = ({ title }: Props): JSX.Element => {
+export const WindowController = ({ title, eventsName }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRunningOnBackground, setIsRunningOnBackground] = useState(false)
+
+  useEffect(() => {
+    window.mainApi.onOreloHide(() => {
+      if (eventsName.toLowerCase() === 'orelo') {
+        setIsRunningOnBackground(true)
+      }
+    })
+  }, [])
 
   const defineButtonText = (): string => {
     if (!isOpen) return 'Abrir janela'
@@ -18,21 +26,21 @@ export const WindowController = ({ title }: Props): JSX.Element => {
 
   const primaryBtnHandler = (): void => {
     if (!isOpen) {
-      window.mainApi[`open${title}`]()
+      window.mainApi[`open${eventsName}`]()
       setIsOpen(true)
       return
     }
     if (!isRunningOnBackground) {
-      window.mainApi[`hide${title}`]()
+      window.mainApi[`hide${eventsName}`]()
       setIsRunningOnBackground(true)
       return
     }
     setIsRunningOnBackground(false)
-    window.mainApi[`show${title}`]()
+    window.mainApi[`show${eventsName}`]()
   }
 
   const closeHandler = (): void => {
-    window.mainApi[`close${title}`]()
+    window.mainApi[`close${eventsName}`]()
     setIsOpen(false)
     setIsRunningOnBackground(false)
   }

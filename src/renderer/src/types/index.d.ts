@@ -12,5 +12,6 @@ interface Window {
     closeOrelo: () => void
     showOrelo: () => void
     hideOrelo: () => void
+    onOreloHide: (callback: () => void) => void
   }
 }

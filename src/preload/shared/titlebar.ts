@@ -1,5 +1,5 @@
 import { IpcRenderer, ipcRenderer } from 'electron'
-import { WindowApi, WindowTitle } from '../../types/types'
+import { WindowApi, WindowTitle } from '../../main/types/types'
 
 export const windowApi = (title: WindowTitle): WindowApi => {
   return {

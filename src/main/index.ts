@@ -4,9 +4,16 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { initializeWindowHandler } from './ipcHandlers/window'
 import { initializeMainHandler } from './ipcHandlers/main'
+import { WindowTitle } from './types/types'
+
+let mainWindow: BrowserWindow
+
+export const sendHideWindow = (title: WindowTitle): void => {
+  mainWindow.webContents.send(`on_${title.toLowerCase()}_hide`)
+}
 
 function createWindow(): void {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: 'Jogabiliday Client',
     width: 480,
     height: 670,
