@@ -12,7 +12,8 @@ export default defineConfig({
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'src/preload/main/preload.ts'),
-          orelo: resolve(__dirname, 'src/preload/orelo/preload.ts')
+          orelo: resolve(__dirname, 'src/preload/orelo/preload.ts'),
+          oreloView: resolve(__dirname, 'src/preload/orelo/view.ts')
         }
       }
     }

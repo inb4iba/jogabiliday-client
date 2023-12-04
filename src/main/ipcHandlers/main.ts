@@ -22,4 +22,7 @@ export const initializeMainHandler = (): void => {
   ipcMain.handle('stop_server', async (): Promise<string> => {
     return stopServer()
   })
+  ipcMain.on('orelo_data', (_e, data) =>
+    console.log('apoiadores', data['contributors'], 'valor', data['value'])
+  )
 }
