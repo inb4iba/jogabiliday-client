@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
 try {
-  contextBridge.exposeInMainWorld('tipaApi', {
+  contextBridge.exposeInMainWorld('windowApi', {
     sendData: (data): void => ipcRenderer.send('tipa_data', data)
   })
 } catch (error) {

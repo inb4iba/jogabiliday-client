@@ -12,9 +12,10 @@ export default defineConfig({
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'src/preload/main/preload.ts'),
-          external: resolve(__dirname, 'src/preload/externals/preload.ts'),
-          orelo: resolve(__dirname, 'src/preload/externals/orelo.ts'),
-          tipa: resolve(__dirname, 'src/preload/externals/tipa.ts')
+          orelo: resolve(__dirname, 'src/preload/orelo/preload.ts'),
+          tipa: resolve(__dirname, 'src/preload/tipa/preload.ts'),
+          oreloView: resolve(__dirname, 'src/preload/orelo/orelo.ts'),
+          tipaView: resolve(__dirname, 'src/preload/tipa/tipa.ts')
         }
       }
     }

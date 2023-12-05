@@ -6,6 +6,10 @@ export type WindowApi = {
   restore: () => void
   close: () => void
   onResizeWindow: (callback: () => void) => void
+  getTitle: () => Promise<string>
+}
+export type OreloApi = {
+  sendData: (data: OreloData) => void
 }
 
 export type Data = {
@@ -13,4 +17,9 @@ export type Data = {
   data?: {
     message: string
   }
+}
+
+type OreloData = {
+  contributors: string
+  value: string
 }

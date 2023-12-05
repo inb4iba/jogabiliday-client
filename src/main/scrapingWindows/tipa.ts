@@ -64,14 +64,14 @@ const createWindow = async (): Promise<void> => {
     autoHideMenuBar: true,
     frame: false,
     webPreferences: {
-      preload: join(__dirname, '../preload/external.js'),
+      preload: join(__dirname, '../preload/tipa.js'),
       sandbox: false
     }
   })
 
   const view = new BrowserView({
     webPreferences: {
-      preload: join(__dirname, '../preload/tipa.js')
+      preload: join(__dirname, '../preload/tipaView.js')
     }
   })
   tipaWindow.setBrowserView(view)
@@ -80,7 +80,9 @@ const createWindow = async (): Promise<void> => {
   await view.webContents.loadURL('https://tipa.ai/')
 
   tipaWindow.on('ready-to-show', async () => {
-    if (tipaWindow) tipaWindow.show()
+    if (tipaWindow) {
+      tipaWindow.show()
+    }
   })
 
   tipaWindow.on('close', async () => {
@@ -94,5 +96,5 @@ const createWindow = async (): Promise<void> => {
     tipaWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  removeListeners = initializeWindowHandler(tipaWindow, 'ORELO')
+  removeListeners = initializeWindowHandler(tipaWindow, 'TIPA')
 }

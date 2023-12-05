@@ -62,14 +62,14 @@ const createWindow = async (): Promise<void> => {
     autoHideMenuBar: true,
     frame: false,
     webPreferences: {
-      preload: join(__dirname, '../preload/external.js'),
+      preload: join(__dirname, '../preload/orelo.js'),
       sandbox: false
     }
   })
 
   const view = new BrowserView({
     webPreferences: {
-      preload: join(__dirname, '../preload/orelo.js')
+      preload: join(__dirname, '../preload/oreloView.js')
     }
   })
   oreloWindow.setBrowserView(view)
@@ -78,7 +78,9 @@ const createWindow = async (): Promise<void> => {
   await view.webContents.loadURL('https://orelo.cc/')
 
   oreloWindow.on('ready-to-show', async () => {
-    if (oreloWindow) oreloWindow.show()
+    if (oreloWindow) {
+      oreloWindow.show()
+    }
   })
 
   oreloWindow.on('close', async () => {

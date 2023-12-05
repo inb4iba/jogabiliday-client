@@ -10,6 +10,8 @@ export const windowApi = (title: WindowTitle): WindowApi => {
       title === 'MAIN'
         ? ipcRenderer.send(`close_window:${title}`)
         : ipcRenderer.send(`hide_window:${title}`),
-    onResizeWindow: (callback: () => void): IpcRenderer => ipcRenderer.on('resize_window', callback)
+    onResizeWindow: (callback: () => void): IpcRenderer =>
+      ipcRenderer.on('resize_window', callback),
+    getTitle: (): Promise<string> => ipcRenderer.invoke(`get_window_title:${title}`)
   }
 }
