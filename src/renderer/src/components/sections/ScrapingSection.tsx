@@ -1,21 +1,11 @@
-import { Button } from '../Button'
 import { JSX } from 'react'
+import { WindowController } from '../WindowController'
 
 export const ScrapingSection = (): JSX.Element => {
   return (
-    <section>
-      <h4>Orelo</h4>
-      <div className="flex">
-        <Button className="flex-grow">
-          <span>Abrir Janela</span>
-        </Button>
-      </div>
-      <h4>Tipa Ai</h4>
-      <div className="flex">
-        <Button className="flex-grow">
-          <span>Abrir Janela</span>
-        </Button>
-      </div>
+    <section className="flex flex-col gap-2">
+      <WindowController title="Orelo" eventsName="Orelo" hasIdInput />
+      <WindowController title="Tipa Ai" eventsName="Tipa" />
     </section>
   )
 }
