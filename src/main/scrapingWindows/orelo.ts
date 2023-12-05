@@ -23,18 +23,22 @@ export const hideOrelo = (): void => {
   if (oreloWindow) oreloWindow.hide()
 }
 
-const checkErrors = async (id: string): Promise<BrowserView> => {
-  if (!oreloWindow) throw new Error('Janela da Orelo não está aberta')
-  if (!id) throw new Error('O ID da Orelo precisa estar preenchido')
+export const checkOreloErrors = async (id: string): Promise<BrowserView> => {
+  if (!oreloWindow) throw new Error('Orelo: Janela não está aberta')
+  if (!id) throw new Error('Orelo: O ID precisa estar preenchido')
   const view = oreloWindow.getBrowserView()
-  if (!view) throw new Error('Ocorreu um erro na Orelo')
+  if (!view) throw new Error('Orelo: Ocorreu um erro ao carregar a página')
   await view.webContents.loadURL(`https://orelo.cc/podcast/${id}/metricas`)
   await sleep(2000)
-  if (view.webContents.getURL().includes('error')) throw new Error('ID da Orelo inválido')
+  if (view.webContents.getURL().includes('error'))
+    throw new Error('Orelo: Não conectado ou ID inválido')
   return view
 }
 
-const startScraping = (view: BrowserView): void => {
+export const startOreloScraping = (): void => {
+  if (!oreloWindow) return
+  const view = oreloWindow.getBrowserView()
+  if (!view) return
   setInterval(async () => {
     view.webContents.reload()
     await sleep(5000)
@@ -45,12 +49,7 @@ const startScraping = (view: BrowserView): void => {
         card.children[1].textContent)
       window.oreloApi.sendData({contributors, value})
     `)
-  }, 10000)
-}
-
-export const scrapOrelo = async (id: string): Promise<void> => {
-  const view = await checkErrors(id)
-  startScraping(view)
+  }, 60000)
 }
 
 const createWindow = async (): Promise<void> => {
