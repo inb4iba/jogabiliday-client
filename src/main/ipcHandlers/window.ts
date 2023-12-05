@@ -15,6 +15,7 @@ export const initializeWindowHandler = (
     window.hide()
     sendHideWindow(title)
   }
+  const getTitle = (): string => window.title
 
   ipcMain.on(`minimize_window:${title}`, minimize)
   ipcMain.on(`maximize_window:${title}`, maximize)
@@ -22,6 +23,11 @@ export const initializeWindowHandler = (
   ipcMain.on(`close_window:${title}`, close)
   ipcMain.on(`hide_window:${title}`, hide)
   ipcMain.on(`show_window:${title}`, show)
+  try {
+    ipcMain.handle(`get_window_title:${title}`, getTitle)
+  } catch (error) {
+    if (error instanceof Error) console.log('error:', error.message)
+  }
 
   window.on('maximize', () => {
     window.webContents.send('resize_window')
@@ -38,5 +44,6 @@ export const initializeWindowHandler = (
     ipcMain.removeListener(`close_window:${title}`, close)
     ipcMain.removeListener(`hide_window:${title}`, hide)
     ipcMain.removeListener(`show_window:${title}`, show)
+    ipcMain.removeListener(`get_window_title:${title}`, getTitle)
   }
 }

@@ -13,7 +13,9 @@ export default defineConfig({
         input: {
           main: resolve(__dirname, 'src/preload/main/preload.ts'),
           orelo: resolve(__dirname, 'src/preload/orelo/preload.ts'),
-          oreloView: resolve(__dirname, 'src/preload/orelo/view.ts')
+          tipa: resolve(__dirname, 'src/preload/tipa/preload.ts'),
+          oreloView: resolve(__dirname, 'src/preload/orelo/orelo.ts'),
+          tipaView: resolve(__dirname, 'src/preload/tipa/tipa.ts')
         }
       }
     }

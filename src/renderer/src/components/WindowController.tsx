@@ -21,6 +21,11 @@ export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.
         setIsRunningOnBackground(true)
       }
     })
+    window.mainApi.onTipaHide(() => {
+      if (eventsName.toLowerCase() === 'tipa') {
+        setIsRunningOnBackground(true)
+      }
+    })
   }, [])
 
   const defineButtonText = (): string => {

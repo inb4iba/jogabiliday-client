@@ -5,7 +5,8 @@ import icon from '../../resources/icon.png?asset'
 import { initializeWindowHandler } from './ipcHandlers/window'
 import { initializeMainHandler } from './ipcHandlers/main'
 import { Data, WindowTitle } from './types/types'
-import { scrapOrelo } from './scrapingWindows/orelo'
+import { checkOreloErrors, startOreloScraping } from './scrapingWindows/orelo'
+import { checkTipaErrors, startTipaScraping } from './scrapingWindows/tipa'
 
 let mainWindow: BrowserWindow
 
@@ -15,7 +16,10 @@ export const sendHideWindow = (title: WindowTitle): void => {
 
 export const startServer = async (oreloId: string): Promise<Data> => {
   try {
-    await scrapOrelo(oreloId)
+    await checkOreloErrors(oreloId)
+    await checkTipaErrors()
+    startOreloScraping()
+    startTipaScraping()
     return { type: 'data', data: { message: 'connected' } }
   } catch (error) {
     if (error instanceof Error) return { type: 'error', data: { message: error.message } }
