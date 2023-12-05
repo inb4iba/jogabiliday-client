@@ -32,7 +32,7 @@ export const initializeMainHandler = (): void => {
   ipcMain.handle('start_server', async (_e, data): Promise<Data> => {
     return startServer(data['oreloId'])
   })
-  ipcMain.handle('stop_server', async (): Promise<string> => {
+  ipcMain.handle('stop_server', async (): Promise<Data> => {
     return stopServer()
   })
   ipcMain.on('orelo_data', (_e, data: OreloData) =>

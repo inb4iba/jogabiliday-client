@@ -27,6 +27,6 @@ interface Window {
     hideTipa: () => void
     onTipaHide: (callback: () => void) => void
     startServer: ({ oreloId: string }) => Promise<Data>
-    stopServer: () => Promise<string>
+    stopServer: () => Promise<Data>
   }
 }

@@ -6,6 +6,7 @@ import { sleep } from '../utils/sleep'
 
 let tipaWindow: BrowserWindow | undefined
 let removeListeners: () => void | undefined
+let intervalHandler: ReturnType<typeof setInterval>
 
 export const openTipa = (): void => {
   if (!tipaWindow) createWindow()
@@ -37,7 +38,7 @@ export const startTipaScraping = (): void => {
   if (!tipaWindow) return
   const view = tipaWindow.getBrowserView()
   if (!view) return
-  setInterval(async () => {
+  intervalHandler = setInterval(async () => {
     view.webContents.loadURL('https://tipa.ai/dashboard/book')
     await sleep(5000)
     // TODO update scrap code
@@ -46,6 +47,10 @@ export const startTipaScraping = (): void => {
       window.tipaApi.sendData({value})
     `)
   }, 60000)
+}
+
+export const stopTipaScraping = (): void => {
+  clearInterval(intervalHandler)
 }
 
 const createWindow = async (): Promise<void> => {

@@ -32,9 +32,12 @@ export const Main = (): JSX.Element => {
     setServerBtn('DISCONNECTING')
     setStatus('Parando servidor...')
     const res = await window.mainApi.stopServer()
-    if (res === 'disconnected') {
+    if (res.type === 'data') {
       setServerBtn('STOPPED')
       setStatus('Servidor parado')
+    } else {
+      setServerBtn('RUNNING')
+      if (res.data) setStatus(res.data.message)
     }
   }
 

@@ -5,8 +5,8 @@ import icon from '../../resources/icon.png?asset'
 import { initializeWindowHandler } from './ipcHandlers/window'
 import { initializeMainHandler } from './ipcHandlers/main'
 import { Data, WindowTitle } from './types/types'
-import { checkOreloErrors, startOreloScraping } from './scrapingWindows/orelo'
-import { checkTipaErrors, startTipaScraping } from './scrapingWindows/tipa'
+import { checkOreloErrors, startOreloScraping, stopOreloScraping } from './scrapingWindows/orelo'
+import { checkTipaErrors, startTipaScraping, stopTipaScraping } from './scrapingWindows/tipa'
 
 let mainWindow: BrowserWindow
 
@@ -27,12 +27,15 @@ export const startServer = async (oreloId: string): Promise<Data> => {
   }
 }
 
-export const stopServer = async (): Promise<string> => {
-  return new Promise<string>((res) => {
-    setTimeout(() => {
-      res('disconnected')
-    }, 3000)
-  })
+export const stopServer = async (): Promise<Data> => {
+  try {
+    stopOreloScraping()
+    stopTipaScraping()
+    return { type: 'data', data: { message: 'disconnected' } }
+  } catch (error) {
+    if (error instanceof Error) return { type: 'error', data: { message: error.message } }
+    return { type: 'error' }
+  }
 }
 
 function createWindow(): void {

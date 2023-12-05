@@ -6,6 +6,7 @@ import { sleep } from '../utils/sleep'
 
 let oreloWindow: BrowserWindow | undefined
 let removeListeners: () => void | undefined
+let intervalHandler: ReturnType<typeof setInterval>
 
 export const openOrelo = (): void => {
   if (!oreloWindow) createWindow()
@@ -39,7 +40,7 @@ export const startOreloScraping = (): void => {
   if (!oreloWindow) return
   const view = oreloWindow.getBrowserView()
   if (!view) return
-  setInterval(async () => {
+  intervalHandler = setInterval(async () => {
     view.webContents.reload()
     await sleep(5000)
     view.webContents.executeJavaScript(`
@@ -50,6 +51,10 @@ export const startOreloScraping = (): void => {
       window.oreloApi.sendData({contributors, value})
     `)
   }, 60000)
+}
+
+export const stopOreloScraping = (): void => {
+  clearInterval(intervalHandler)
 }
 
 const createWindow = async (): Promise<void> => {
