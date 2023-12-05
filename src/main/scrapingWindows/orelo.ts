@@ -35,7 +35,6 @@ const checkErrors = async (id: string): Promise<BrowserView> => {
 }
 
 const startScraping = (view: BrowserView): void => {
-  view.webContents.openDevTools()
   setInterval(async () => {
     view.webContents.reload()
     await sleep(5000)
@@ -63,14 +62,14 @@ const createWindow = async (): Promise<void> => {
     autoHideMenuBar: true,
     frame: false,
     webPreferences: {
-      preload: join(__dirname, '../preload/orelo.js'),
+      preload: join(__dirname, '../preload/external.js'),
       sandbox: false
     }
   })
 
   const view = new BrowserView({
     webPreferences: {
-      preload: join(__dirname, '../preload/oreloView.js')
+      preload: join(__dirname, '../preload/orelo.js')
     }
   })
   oreloWindow.setBrowserView(view)
