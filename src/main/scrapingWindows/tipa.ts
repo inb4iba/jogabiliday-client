@@ -38,16 +38,13 @@ export const startTipaScraping = (): void => {
   const view = tipaWindow.getBrowserView()
   if (!view) return
   setInterval(async () => {
-    view.webContents.reload()
+    view.webContents.loadURL('https://tipa.ai/dashboard/book')
     await sleep(5000)
     // TODO update scrap code
-    // view.webContents.executeJavaScript(`
-    //   const cards = [...document.querySelectorAll('.MuiCard-root')]
-    //   const [contributors, value] = cards.filter(card =>
-    //     card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
-    //     card.children[1].textContent)
-    //   window.oreloApi.sendData({contributors, value})
-    // `)
+    view.webContents.executeJavaScript(`
+      const value = document.getElementsByClassName("amount")[0].innerHTML;
+      window.tipaApi.sendData({value})
+    `)
   }, 60000)
 }
 

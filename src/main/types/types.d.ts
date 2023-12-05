@@ -23,3 +23,7 @@ type OreloData = {
   contributors: string
   value: string
 }
+
+type TipaData = {
+  value: string
+}
