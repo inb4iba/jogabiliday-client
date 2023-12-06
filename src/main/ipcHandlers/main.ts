@@ -3,6 +3,7 @@ import { closeOrelo, hideOrelo, openOrelo, showOrelo } from '../scrapingWindows/
 import { startServer, stopServer } from '..'
 import { Data, OreloData, TipaData } from '../types/types'
 import { closeTipa, hideTipa, openTipa, showTipa } from '../scrapingWindows/tipa'
+import { sendMessage } from '../server'
 
 export const initializeMainHandler = (): void => {
   ipcMain.on('open_orelo', () => {
@@ -35,8 +36,13 @@ export const initializeMainHandler = (): void => {
   ipcMain.handle('stop_server', async (): Promise<Data> => {
     return stopServer()
   })
-  ipcMain.on('orelo_data', (_e, data: OreloData) =>
-    console.log('Orelo: ', 'apoiadores', data.contributors, 'valor', data.value)
-  )
-  ipcMain.on('tipa_data', (_e, data: TipaData) => console.log('Tipa Ai: ', 'valor', data.value))
+  ipcMain.on('orelo_data', (_e, data: OreloData) => {
+    // console.log('Orelo: ', 'apoiadores', data.contributors, 'valor', data.value)
+    sendMessage('VALUE', data.value)
+    sendMessage('CONTRIBUTORS', data.contributors)
+  })
+  ipcMain.on('tipa_data', (_e, data: TipaData) => {
+    // console.log('Tipa Ai: ', 'valor', data.value)
+    sendMessage('VALUE', data.value)
+  })
 }

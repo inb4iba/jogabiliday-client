@@ -7,6 +7,7 @@ import { initializeMainHandler } from './ipcHandlers/main'
 import { Data, WindowTitle } from './types/types'
 import { checkOreloErrors, startOreloScraping, stopOreloScraping } from './scrapingWindows/orelo'
 import { checkTipaErrors, startTipaScraping, stopTipaScraping } from './scrapingWindows/tipa'
+import { closeServer, initializeServer } from './server'
 
 let mainWindow: BrowserWindow
 
@@ -20,6 +21,7 @@ export const startServer = async (oreloId: string): Promise<Data> => {
     await checkTipaErrors()
     startOreloScraping()
     startTipaScraping()
+    await initializeServer()
     return { type: 'data', data: { message: 'connected' } }
   } catch (error) {
     if (error instanceof Error) return { type: 'error', data: { message: error.message } }
@@ -31,6 +33,7 @@ export const stopServer = async (): Promise<Data> => {
   try {
     stopOreloScraping()
     stopTipaScraping()
+    await closeServer()
     return { type: 'data', data: { message: 'disconnected' } }
   } catch (error) {
     if (error instanceof Error) return { type: 'error', data: { message: error.message } }
