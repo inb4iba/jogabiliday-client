@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useGoalBarStore } from '@renderer/store/goalBarStore'
+import { useEffect, useRef } from 'react'
 
 export const GoalBar = (): JSX.Element => {
   const totalValueRef = useRef<HTMLSpanElement>(null)
@@ -9,18 +10,18 @@ export const GoalBar = (): JSX.Element => {
   const darkDescriptionRef = useRef<HTMLSpanElement>(null)
   const darkValueRef = useRef<HTMLSpanElement>(null)
 
-  const [width, setWidth] = useState(400)
-  const [height, setHeight] = useState(60)
-  const [totalValue, setTotalValue] = useState(950)
-  const [goalValue, setGoalValue] = useState(1000)
-  const [previousValue, setPreviousValue] = useState(0)
-  const [border, setBorder] = useState(4)
-  const [fillColor, setFillColor] = useState('#42FFEB')
-  const [emptyColor, setEmptyColor] = useState('#261752')
-  const [textSize, setTextSize] = useState(18)
-  const [textWeight, setTextWeight] = useState(500)
-  const [valueSize, setValueSize] = useState(32)
-  const [padding, setPadding] = useState(8)
+  const totalValue = useGoalBarStore((state) => state.totalValue)
+  const goalValue = useGoalBarStore((state) => state.goalValue)
+  const previousValue = useGoalBarStore((state) => state.previousValue)
+  const width = useGoalBarStore((state) => state.width)
+  const height = useGoalBarStore((state) => state.height)
+  const border = useGoalBarStore((state) => state.border)
+  const fillColor = useGoalBarStore((state) => state.fillColor)
+  const bgColor = useGoalBarStore((state) => state.bgColor)
+  const textSize = useGoalBarStore((state) => state.textSize)
+  const textWeight = useGoalBarStore((state) => state.textWeight)
+  const valueSize = useGoalBarStore((state) => state.valueSize)
+  const padding = useGoalBarStore((state) => state.padding)
 
   useEffect(() => {
     if (barRef.current) {
@@ -28,7 +29,7 @@ export const GoalBar = (): JSX.Element => {
       barRef.current.style.height = `${height}px`
       barRef.current.style.fontWeight = textWeight + ''
       barRef.current.style.color = fillColor
-      barRef.current.style.backgroundColor = emptyColor
+      barRef.current.style.backgroundColor = bgColor
     }
     if (descriptionRef.current && darkDescriptionRef.current) {
       descriptionRef.current.style.left = `${padding}px`
@@ -56,10 +57,10 @@ export const GoalBar = (): JSX.Element => {
       fillRef.current.style.height = `${height - border * 2}px`
       fillRef.current.style.left = `${border}px`
       fillRef.current.style.top = `${border}px`
-      fillRef.current.style.color = emptyColor
+      fillRef.current.style.color = bgColor
       fillRef.current.style.backgroundColor = fillColor
     }
-  }, [])
+  }, [fillColor, bgColor, border, padding, width, height, textSize, textWeight, valueSize])
 
   return (
     <section className="p-6" id="goal-bar">

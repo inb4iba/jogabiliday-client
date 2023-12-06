@@ -72,7 +72,9 @@ export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.
           </Button>
         )}
       </div>
-      {hasIdInput && <Input placeholder="ID" idRef={idInputRef} onChange={onIdInputChange} />}
+      {hasIdInput && (
+        <Input type="text" placeholder="ID" _ref={idInputRef} onChange={onIdInputChange} />
+      )}
     </div>
   )
 }

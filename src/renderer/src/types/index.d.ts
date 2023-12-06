@@ -5,6 +5,18 @@ type Data = {
   }
 }
 
+type CustomizationData = {
+  bgColor: string
+  fillColor: string
+  width: number
+  height: number
+  border: number
+  padding: number
+  textSize: number
+  valueSize: number
+  textWeight: number
+}
+
 interface Window {
   windowApi: {
     minimize: () => void
@@ -28,5 +40,6 @@ interface Window {
     onTipaHide: (callback: () => void) => void
     startServer: ({ oreloId: string }) => Promise<Data>
     stopServer: () => Promise<Data>
+    customizeBar: (data: CustomizationData) => void
   }
 }

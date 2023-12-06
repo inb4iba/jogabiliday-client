@@ -1,5 +1,5 @@
 import { IpcRenderer, ipcRenderer } from 'electron'
-import { Data } from '../../main/types/types'
+import { CustomizationData, Data } from '../../main/types/types'
 
 export const mainApi = {
   openOrelo: (): void => ipcRenderer.send('open_orelo'),
@@ -18,5 +18,6 @@ export const mainApi = {
   },
   startServer: (data: { oreloId: string }): Promise<Data> =>
     ipcRenderer.invoke('start_server', data),
-  stopServer: (): Promise<string> => ipcRenderer.invoke('stop_server')
+  stopServer: (): Promise<string> => ipcRenderer.invoke('stop_server'),
+  customizeBar: (data: CustomizationData): void => ipcRenderer.send('customize_bar', data)
 }

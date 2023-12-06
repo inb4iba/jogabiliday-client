@@ -21,7 +21,6 @@ export const startServer = async (oreloId: string): Promise<Data> => {
     await checkTipaErrors()
     startOreloScraping()
     startTipaScraping()
-    await initializeServer()
     return { type: 'data', data: { message: 'connected' } }
   } catch (error) {
     if (error instanceof Error) return { type: 'error', data: { message: error.message } }
@@ -73,6 +72,7 @@ function createWindow(): void {
 
   initializeWindowHandler(mainWindow, 'MAIN')
   initializeMainHandler()
+  initializeServer()
 }
 
 app.whenReady().then(() => {
