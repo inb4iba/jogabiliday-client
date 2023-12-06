@@ -1,5 +1,5 @@
 import { JSX, useEffect, useState } from 'react'
-import { GoalBar } from './GoalBar'
+import { GoalBar } from '../components/overlay/GoalBar'
 
 export const Overlay = (): JSX.Element => {
   const [wsConnected, setWsConnected] = useState(false)
