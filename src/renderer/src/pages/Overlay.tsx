@@ -1,6 +1,7 @@
 import { JSX, useEffect } from 'react'
 import { GoalBar } from '../components/overlay/GoalBar'
 import { useGoalBarStore } from '@renderer/store/goalBarStore'
+import { Supporters } from '@renderer/components/overlay/Supporters'
 
 export const Overlay = (): JSX.Element => {
   const [
@@ -67,6 +68,7 @@ export const Overlay = (): JSX.Element => {
   return (
     <>
       <GoalBar />
+      <Supporters />
     </>
   )
 }
