@@ -8,7 +8,8 @@ export const ConfigSection = (): JSX.Element => {
   const widthRef = useRef<HTMLInputElement>(null)
   const heightRef = useRef<HTMLInputElement>(null)
   const borderRef = useRef<HTMLInputElement>(null)
-  const paddingRef = useRef<HTMLInputElement>(null)
+  const paddingHRef = useRef<HTMLInputElement>(null)
+  const paddingVRef = useRef<HTMLInputElement>(null)
   const textSizeRef = useRef<HTMLInputElement>(null)
   const valueSizeRef = useRef<HTMLInputElement>(null)
   const textWeightRef = useRef<HTMLInputElement>(null)
@@ -23,7 +24,8 @@ export const ConfigSection = (): JSX.Element => {
         widthRef.current &&
         heightRef.current &&
         borderRef.current &&
-        paddingRef.current &&
+        paddingHRef.current &&
+        paddingVRef.current &&
         textSizeRef.current &&
         valueSizeRef.current &&
         textWeightRef.current
@@ -35,7 +37,8 @@ export const ConfigSection = (): JSX.Element => {
           isNaN(+widthRef.current?.value) ||
           isNaN(+heightRef.current?.value) ||
           isNaN(+borderRef.current?.value) ||
-          isNaN(+paddingRef.current?.value) ||
+          isNaN(+paddingHRef.current?.value) ||
+          isNaN(+paddingVRef.current?.value) ||
           isNaN(+textSizeRef.current?.value) ||
           isNaN(+valueSizeRef.current?.value) ||
           isNaN(+textWeightRef.current?.value)
@@ -46,7 +49,8 @@ export const ConfigSection = (): JSX.Element => {
           fillColor: fillColorRef.current.value,
           border: +borderRef.current.value,
           height: +heightRef.current.value,
-          padding: +paddingRef.current.value,
+          paddingH: +paddingHRef.current.value,
+          paddingV: +paddingVRef.current.value,
           textSize: +textSizeRef.current.value,
           textWeight: +textWeightRef.current.value,
           valueSize: +valueSizeRef.current.value,
@@ -88,10 +92,16 @@ export const ConfigSection = (): JSX.Element => {
             <Input _ref={heightRef} label="Altura" type="text" onChange={customizeBar} value="60" />
           </div>
           <div className="flex justify-between gap-2">
-            <Input _ref={borderRef} label="Borda" type="text" onChange={customizeBar} value="4" />
             <Input
-              _ref={paddingRef}
-              label="Espaçamento"
+              _ref={paddingHRef}
+              label="Espaçamento Horizontal"
+              type="text"
+              onChange={customizeBar}
+              value="8"
+            />
+            <Input
+              _ref={paddingVRef}
+              label="Espaçamento Vertical"
               type="text"
               onChange={customizeBar}
               value="8"
@@ -113,13 +123,16 @@ export const ConfigSection = (): JSX.Element => {
               value="32"
             />
           </div>
-          <Input
-            _ref={textWeightRef}
-            label="Peso fonte"
-            type="text"
-            onChange={customizeBar}
-            value="500"
-          />
+          <div className="flex justify-between gap-2">
+            <Input _ref={borderRef} label="Borda" type="text" onChange={customizeBar} value="4" />
+            <Input
+              _ref={textWeightRef}
+              label="Peso fonte"
+              type="text"
+              onChange={customizeBar}
+              value="500"
+            />
+          </div>
         </>
       </Accordion>
     </section>

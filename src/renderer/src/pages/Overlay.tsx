@@ -9,7 +9,8 @@ export const Overlay = (): JSX.Element => {
     updateWidth,
     updateHeight,
     updateBorder,
-    updatePadding,
+    updatePaddingH,
+    updatePaddingV,
     updateValueSize,
     updateTextSize,
     updateTextWeight
@@ -19,7 +20,8 @@ export const Overlay = (): JSX.Element => {
     state.updateWidth,
     state.updateHeight,
     state.updateBorder,
-    state.updatePadding,
+    state.updatePaddingH,
+    state.updatePaddingV,
     state.updateValueSize,
     state.updateTextSize,
     state.updateTextWeight
@@ -42,7 +44,8 @@ export const Overlay = (): JSX.Element => {
           width,
           height,
           border,
-          padding,
+          paddingH,
+          paddingV,
           textSize,
           valueSize,
           textWeight
@@ -51,7 +54,8 @@ export const Overlay = (): JSX.Element => {
         updateFillColor(fillColor)
         updateBorder(border)
         updateHeight(height)
-        updatePadding(padding)
+        updatePaddingH(paddingH)
+        updatePaddingV(paddingV)
         updateTextSize(textSize)
         updateTextWeight(textWeight)
         updateValueSize(valueSize)

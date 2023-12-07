@@ -7,7 +7,8 @@ type State = {
   width: number
   height: number
   border: number
-  padding: number
+  paddingH: number
+  paddingV: number
   textSize: number
   valueSize: number
   textWeight: number
@@ -22,7 +23,8 @@ type Action = {
   updateWidth: (width: number) => void
   updateHeight: (height: number) => void
   updateBorder: (border: number) => void
-  updatePadding: (padding: number) => void
+  updatePaddingH: (padding: number) => void
+  updatePaddingV: (padding: number) => void
   updateTextSize: (textSize: number) => void
   updateValueSize: (valueSize: number) => void
   updateTextWeight: (textWeight: number) => void
@@ -34,7 +36,8 @@ export const useGoalBarStore = create<State & Action>()(
     fillColor: '#42FFEB',
     border: 4,
     height: 60,
-    padding: 8,
+    paddingH: 8,
+    paddingV: 8,
     textSize: 18,
     textWeight: 500,
     valueSize: 32,
@@ -58,9 +61,13 @@ export const useGoalBarStore = create<State & Action>()(
       set((state) => {
         state.height = height
       }),
-    updatePadding: (padding): void =>
+    updatePaddingH: (padding): void =>
       set((state) => {
-        state.padding = padding
+        state.paddingH = padding
+      }),
+    updatePaddingV: (padding): void =>
+      set((state) => {
+        state.paddingV = padding
       }),
     updateTextSize: (textSize): void =>
       set((state) => {

@@ -21,7 +21,8 @@ export const GoalBar = (): JSX.Element => {
   const textSize = useGoalBarStore((state) => state.textSize)
   const textWeight = useGoalBarStore((state) => state.textWeight)
   const valueSize = useGoalBarStore((state) => state.valueSize)
-  const padding = useGoalBarStore((state) => state.padding)
+  const paddingH = useGoalBarStore((state) => state.paddingH)
+  const paddingV = useGoalBarStore((state) => state.paddingV)
 
   useEffect(() => {
     if (barRef.current) {
@@ -32,17 +33,17 @@ export const GoalBar = (): JSX.Element => {
       barRef.current.style.backgroundColor = bgColor
     }
     if (descriptionRef.current && darkDescriptionRef.current) {
-      descriptionRef.current.style.left = `${padding}px`
-      darkDescriptionRef.current.style.left = `${padding - border}px`
-      descriptionRef.current.style.bottom = `${padding}px`
-      darkDescriptionRef.current.style.bottom = `${padding - border}px`
+      descriptionRef.current.style.left = `${paddingH}px`
+      darkDescriptionRef.current.style.left = `${paddingH - border}px`
+      descriptionRef.current.style.bottom = `${paddingV}px`
+      darkDescriptionRef.current.style.bottom = `${paddingV - border}px`
       descriptionRef.current.style.fontSize = `${textSize}px`
       darkDescriptionRef.current.style.fontSize = `${textSize}px`
     }
     if (goalValueRef.current && darkValueRef.current) {
-      goalValueRef.current.style.left = `${width - padding - goalValueRef.current.clientWidth}px`
+      goalValueRef.current.style.left = `${width - paddingH - goalValueRef.current.clientWidth}px`
       darkValueRef.current.style.left = `${
-        width - padding - darkValueRef.current.clientWidth - border
+        width - paddingH - darkValueRef.current.clientWidth - border
       }px`
       goalValueRef.current.style.fontSize = `${valueSize}px`
       darkValueRef.current.style.fontSize = `${valueSize}px`
@@ -60,7 +61,18 @@ export const GoalBar = (): JSX.Element => {
       fillRef.current.style.color = bgColor
       fillRef.current.style.backgroundColor = fillColor
     }
-  }, [fillColor, bgColor, border, padding, width, height, textSize, textWeight, valueSize])
+  }, [
+    fillColor,
+    bgColor,
+    border,
+    paddingH,
+    paddingV,
+    width,
+    height,
+    textSize,
+    textWeight,
+    valueSize
+  ])
 
   return (
     <section className="p-6" id="goal-bar">

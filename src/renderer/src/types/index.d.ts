@@ -11,7 +11,8 @@ type CustomizationData = {
   width: number
   height: number
   border: number
-  padding: number
+  paddingH: number
+  paddingV: number
   textSize: number
   valueSize: number
   textWeight: number
