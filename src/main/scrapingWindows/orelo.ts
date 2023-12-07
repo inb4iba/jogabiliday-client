@@ -6,6 +6,7 @@ import { sleep } from '../utils/sleep'
 
 let oreloWindow: BrowserWindow | undefined
 let removeListeners: () => void | undefined
+let intervalHandler: ReturnType<typeof setInterval>
 
 export const openOrelo = (): void => {
   if (!oreloWindow) createWindow()
@@ -39,17 +40,21 @@ export const startOreloScraping = (): void => {
   if (!oreloWindow) return
   const view = oreloWindow.getBrowserView()
   if (!view) return
-  setInterval(async () => {
+  intervalHandler = setInterval(async () => {
     view.webContents.reload()
     await sleep(5000)
     view.webContents.executeJavaScript(`
       const cards = [...document.querySelectorAll('.MuiCard-root')]
-      const [contributors, value] = cards.filter(card =>
+      const [supporters, value] = cards.filter(card =>
         card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
         card.children[1].textContent)
-      window.oreloApi.sendData({contributors, value})
+      window.oreloApi.sendData({from: 'ORELO', supporters, value})
     `)
   }, 60000)
+}
+
+export const stopOreloScraping = (): void => {
+  clearInterval(intervalHandler)
 }
 
 const createWindow = async (): Promise<void> => {

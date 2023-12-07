@@ -5,6 +5,25 @@ type Data = {
   }
 }
 
+type ValueData = {
+  from: 'ORELO' | 'TIPA' | 'MANUAL'
+  supporters?: string
+  value: string
+}
+
+type CustomizationData = {
+  bgColor: string
+  fillColor: string
+  width: number
+  height: number
+  border: number
+  paddingH: number
+  paddingV: number
+  textSize: number
+  valueSize: number
+  textWeight: number
+}
+
 interface Window {
   windowApi: {
     minimize: () => void
@@ -27,6 +46,10 @@ interface Window {
     hideTipa: () => void
     onTipaHide: (callback: () => void) => void
     startServer: ({ oreloId: string }) => Promise<Data>
-    stopServer: () => Promise<string>
+    stopServer: () => Promise<Data>
+    customizeBar: (data: CustomizationData) => void
+    updateShirts: (data: number) => void
+    updateSupporters: (data: number) => void
+    updateTotalValue: (data: ValueData) => void
   }
 }

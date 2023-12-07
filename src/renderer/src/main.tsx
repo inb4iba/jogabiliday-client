@@ -4,6 +4,7 @@ import './assets/index.css'
 import { App } from './App'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { External } from './pages/External'
+import { Overlay } from './pages/Overlay'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/external',
     element: <External />
+  },
+  {
+    path: '/overlay',
+    element: <Overlay />
   }
 ])
 

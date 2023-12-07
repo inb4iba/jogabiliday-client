@@ -12,7 +12,7 @@ type Props = {
 export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRunningOnBackground, setIsRunningOnBackground] = useState(false)
-  const setId = useOreloStore((state) => state.setId)
+  const [id, setId] = useOreloStore((state) => [state.id, state.setId])
   const idInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -72,7 +72,15 @@ export const WindowController = ({ title, eventsName, hasIdInput }: Props): JSX.
           </Button>
         )}
       </div>
-      {hasIdInput && <Input placeholder="ID" idRef={idInputRef} onChange={onIdInputChange} />}
+      {hasIdInput && (
+        <Input
+          type="text"
+          placeholder="ID"
+          _ref={idInputRef}
+          onChange={onIdInputChange}
+          value={id}
+        />
+      )}
     </div>
   )
 }

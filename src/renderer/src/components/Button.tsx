@@ -1,7 +1,7 @@
 import { JSX } from 'react'
 
 type Props = {
-  children: JSX.Element
+  children: JSX.Element | string
   className?: string
   color?: 'neutral' | 'teal' | 'red' | 'disabled'
   onClick?: () => void

@@ -1,8 +1,9 @@
 import { ipcMain } from 'electron'
 import { closeOrelo, hideOrelo, openOrelo, showOrelo } from '../scrapingWindows/orelo'
 import { startServer, stopServer } from '..'
-import { Data, OreloData, TipaData } from '../types/types'
+import { CustomizationData, Data, ValueData } from '../types/types'
 import { closeTipa, hideTipa, openTipa, showTipa } from '../scrapingWindows/tipa'
+import { sendMessage } from '../server'
 
 export const initializeMainHandler = (): void => {
   ipcMain.on('open_orelo', () => {
@@ -32,11 +33,25 @@ export const initializeMainHandler = (): void => {
   ipcMain.handle('start_server', async (_e, data): Promise<Data> => {
     return startServer(data['oreloId'])
   })
-  ipcMain.handle('stop_server', async (): Promise<string> => {
+  ipcMain.handle('stop_server', async (): Promise<Data> => {
     return stopServer()
   })
-  ipcMain.on('orelo_data', (_e, data: OreloData) =>
-    console.log('Orelo: ', 'apoiadores', data.contributors, 'valor', data.value)
-  )
-  ipcMain.on('tipa_data', (_e, data: TipaData) => console.log('Tipa Ai: ', 'valor', data.value))
+  ipcMain.on('orelo_data', (_e, data: ValueData) => {
+    sendMessage('VALUE', data)
+  })
+  ipcMain.on('tipa_data', (_e, data: ValueData) => {
+    sendMessage('VALUE', data)
+  })
+  ipcMain.on('customize_bar', (_e, data: CustomizationData) => {
+    sendMessage('CUSTOMIZATION', data)
+  })
+  ipcMain.on('update_shirts', (_e, data: number) => {
+    sendMessage('SHIRTS', data)
+  })
+  ipcMain.on('update_supporters', (_e, data: number) => {
+    sendMessage('SUPPORTERS', data)
+  })
+  ipcMain.on('update_total_value', (_e, data: ValueData) => {
+    sendMessage('VALUE', data)
+  })
 }

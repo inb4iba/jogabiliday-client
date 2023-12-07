@@ -32,14 +32,17 @@ export const Main = (): JSX.Element => {
     setServerBtn('DISCONNECTING')
     setStatus('Parando servidor...')
     const res = await window.mainApi.stopServer()
-    if (res === 'disconnected') {
+    if (res.type === 'data') {
       setServerBtn('STOPPED')
       setStatus('Servidor parado')
+    } else {
+      setServerBtn('RUNNING')
+      if (res.data) setStatus(res.data.message)
     }
   }
 
   return (
-    <main className="relative flex flex-col justify-between flex-grow p-3 pt-8 bg-zinc-800 text-zinc-100">
+    <main className="relative flex flex-col justify-between flex-grow p-3 pt-8 overflow-y-auto bg-zinc-800 text-zinc-100">
       <div className="flex flex-col gap-4">
         <Accordion title="Sites">
           <ScrapingSection />

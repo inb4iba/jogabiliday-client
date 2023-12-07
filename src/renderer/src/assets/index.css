@@ -14,6 +14,18 @@
   animation: spin 2s linear infinite;
 }
 
+::-webkit-scrollbar {
+  @apply w-3;
+}
+
+::-webkit-scrollbar-track {
+  @apply mb-8;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-teal-300 border-[3px] border-solid rounded-full border-zinc-800;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
