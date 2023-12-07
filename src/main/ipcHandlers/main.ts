@@ -52,4 +52,7 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('update_supporters', (_e, data: number) => {
     sendMessage('SUPPORTERS', data)
   })
+  ipcMain.on('update_total_value', (_e, data: number) => {
+    sendMessage('VALUE', data)
+  })
 }

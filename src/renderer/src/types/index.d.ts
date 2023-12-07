@@ -44,5 +44,6 @@ interface Window {
     customizeBar: (data: CustomizationData) => void
     updateShirts: (data: number) => void
     updateSupporters: (data: number) => void
+    updateTotalValue: (data: number) => void
   }
 }

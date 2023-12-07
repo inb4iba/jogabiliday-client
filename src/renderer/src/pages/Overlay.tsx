@@ -18,7 +18,8 @@ export const Overlay = (): JSX.Element => {
     updatePaddingV,
     updateValueSize,
     updateTextSize,
-    updateTextWeight
+    updateTextWeight,
+    updateTotalValue
   ] = useGoalBarStore((state) => [
     state.updateBgColor,
     state.updateFillColor,
@@ -29,7 +30,8 @@ export const Overlay = (): JSX.Element => {
     state.updatePaddingV,
     state.updateValueSize,
     state.updateTextSize,
-    state.updateTextWeight
+    state.updateTextWeight,
+    state.updateTotalValue
   ])
   const updateShirts = useShirtsStore((state) => state.updateShirts)
   const updateSupporters = useSupportersStore((state) => state.updateSupporters)
@@ -37,6 +39,7 @@ export const Overlay = (): JSX.Element => {
   useEffect(() => {
     ws.onmessage = (e): void => {
       const { event, args } = JSON.parse(e.data)
+      console.log(event, args)
       if (event === 'CUSTOMIZATION') {
         const {
           bgColor,
@@ -64,6 +67,8 @@ export const Overlay = (): JSX.Element => {
         updateShirts(args[0])
       } else if (event === 'SUPPORTERS') {
         updateSupporters(args[0])
+      } else if (event === 'VALUE') {
+        updateTotalValue(args[0])
       }
     }
   }, [])

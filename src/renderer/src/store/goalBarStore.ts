@@ -28,6 +28,9 @@ type Action = {
   updateTextSize: (textSize: number) => void
   updateValueSize: (valueSize: number) => void
   updateTextWeight: (textWeight: number) => void
+  updateTotalValue: (value: number) => void
+  updateGoalValue: (value: number) => void
+  updatePreviousValue: (value: number) => void
 }
 
 export const useGoalBarStore = create<State & Action>()(
@@ -84,6 +87,18 @@ export const useGoalBarStore = create<State & Action>()(
     updateWidth: (width): void =>
       set((state) => {
         state.width = width
+      }),
+    updateTotalValue: (value): void =>
+      set((state) => {
+        state.totalValue += value
+      }),
+    updateGoalValue: (value): void =>
+      set((state) => {
+        state.goalValue = value
+      }),
+    updatePreviousValue: (value): void =>
+      set((state) => {
+        state.previousValue = value
       })
   }))
 )

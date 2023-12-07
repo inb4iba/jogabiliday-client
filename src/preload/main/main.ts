@@ -25,5 +25,8 @@ export const mainApi = {
   },
   updateSupporters: (data: number): void => {
     ipcRenderer.send('update_supporters', data)
+  },
+  updateTotalValue: (data: number): void => {
+    ipcRenderer.send('update_total_value', data)
   }
 }

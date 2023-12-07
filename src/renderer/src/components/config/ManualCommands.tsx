@@ -5,8 +5,14 @@ import { Input } from '../Input'
 export const ManualCommands = (): JSX.Element => {
   const valueRef = useRef<HTMLInputElement>(null)
 
-  const addValue = (): void => {}
-  const removeValue = (): void => {}
+  const addValue = (): void => {
+    if (valueRef.current && !isNaN(+valueRef.current.value))
+      window.mainApi.updateTotalValue(+valueRef.current.value)
+  }
+  const removeValue = (): void => {
+    if (valueRef.current && !isNaN(+valueRef.current.value))
+      window.mainApi.updateTotalValue(+valueRef.current.value * -1)
+  }
   const onAddShirt = (): void => {
     window.mainApi.updateShirts(1)
   }
