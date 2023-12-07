@@ -48,7 +48,7 @@ export const startOreloScraping = (): void => {
       const [supporters, value] = cards.filter(card =>
         card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
         card.children[1].textContent)
-      window.oreloApi.sendData({supporters, value})
+      window.oreloApi.sendData({from: 'ORELO', supporters, value})
     `)
   }, 60000)
 }

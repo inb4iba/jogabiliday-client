@@ -41,10 +41,9 @@ export const startTipaScraping = (): void => {
   intervalHandler = setInterval(async () => {
     view.webContents.loadURL('https://tipa.ai/dashboard/book')
     await sleep(5000)
-    // TODO update scrap code
     view.webContents.executeJavaScript(`
       const value = document.getElementsByClassName("amount")[0].innerHTML;
-      window.tipaApi.sendData({value})
+      window.tipaApi.sendData({from: 'TIPA', value})
     `)
   }, 60000)
 }

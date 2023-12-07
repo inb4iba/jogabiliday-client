@@ -7,11 +7,14 @@ export const ManualCommands = (): JSX.Element => {
 
   const addValue = (): void => {
     if (valueRef.current && !isNaN(+valueRef.current.value))
-      window.mainApi.updateTotalValue(+valueRef.current.value)
+      window.mainApi.updateTotalValue({ from: 'MANUAL', value: valueRef.current.value })
   }
   const removeValue = (): void => {
     if (valueRef.current && !isNaN(+valueRef.current.value))
-      window.mainApi.updateTotalValue(+valueRef.current.value * -1)
+      window.mainApi.updateTotalValue({
+        from: 'MANUAL',
+        value: (+valueRef.current.value * -1).toString()
+      })
   }
   const onAddShirt = (): void => {
     window.mainApi.updateShirts(1)

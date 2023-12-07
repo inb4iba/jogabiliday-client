@@ -1,5 +1,5 @@
 import { IpcRenderer, ipcRenderer } from 'electron'
-import { CustomizationData, Data } from '../../main/types/types'
+import { CustomizationData, Data, ValueData } from '../../main/types/types'
 
 export const mainApi = {
   openOrelo: (): void => ipcRenderer.send('open_orelo'),
@@ -26,7 +26,7 @@ export const mainApi = {
   updateSupporters: (data: number): void => {
     ipcRenderer.send('update_supporters', data)
   },
-  updateTotalValue: (data: number): void => {
+  updateTotalValue: (data: ValueData): void => {
     ipcRenderer.send('update_total_value', data)
   }
 }

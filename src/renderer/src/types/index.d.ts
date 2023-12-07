@@ -5,6 +5,12 @@ type Data = {
   }
 }
 
+type ValueData = {
+  from: 'ORELO' | 'TIPA' | 'MANUAL'
+  supporters?: string
+  value: string
+}
+
 type CustomizationData = {
   bgColor: string
   fillColor: string
@@ -44,6 +50,6 @@ interface Window {
     customizeBar: (data: CustomizationData) => void
     updateShirts: (data: number) => void
     updateSupporters: (data: number) => void
-    updateTotalValue: (data: number) => void
+    updateTotalValue: (data: ValueData) => void
   }
 }

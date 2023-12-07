@@ -1,7 +1,7 @@
 import { ipcMain } from 'electron'
 import { closeOrelo, hideOrelo, openOrelo, showOrelo } from '../scrapingWindows/orelo'
 import { startServer, stopServer } from '..'
-import { CustomizationData, Data, OreloData, TipaData } from '../types/types'
+import { CustomizationData, Data, ValueData } from '../types/types'
 import { closeTipa, hideTipa, openTipa, showTipa } from '../scrapingWindows/tipa'
 import { sendMessage } from '../server'
 
@@ -36,12 +36,11 @@ export const initializeMainHandler = (): void => {
   ipcMain.handle('stop_server', async (): Promise<Data> => {
     return stopServer()
   })
-  ipcMain.on('orelo_data', (_e, data: OreloData) => {
-    sendMessage('VALUE', data.value)
-    sendMessage('SUPPORTERS', data.supporters)
+  ipcMain.on('orelo_data', (_e, data: ValueData) => {
+    sendMessage('VALUE', data)
   })
-  ipcMain.on('tipa_data', (_e, data: TipaData) => {
-    sendMessage('VALUE', data.value)
+  ipcMain.on('tipa_data', (_e, data: ValueData) => {
+    sendMessage('VALUE', data)
   })
   ipcMain.on('customize_bar', (_e, data: CustomizationData) => {
     sendMessage('CUSTOMIZATION', data)
@@ -52,7 +51,7 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('update_supporters', (_e, data: number) => {
     sendMessage('SUPPORTERS', data)
   })
-  ipcMain.on('update_total_value', (_e, data: number) => {
+  ipcMain.on('update_total_value', (_e, data: ValueData) => {
     sendMessage('VALUE', data)
   })
 }
