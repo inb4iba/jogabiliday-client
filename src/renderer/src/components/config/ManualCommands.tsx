@@ -7,17 +7,29 @@ export const ManualCommands = (): JSX.Element => {
 
   const addValue = (): void => {}
   const removeValue = (): void => {}
+  const onAddShirt = (): void => {
+    window.mainApi.updateShirts(1)
+  }
+  const onRemoveShirt = (): void => {
+    window.mainApi.updateShirts(-1)
+  }
+  const onAddSupporter = (): void => {
+    window.mainApi.updateSupporters(1)
+  }
+  const onRemoveSupporter = (): void => {
+    window.mainApi.updateSupporters(-1)
+  }
 
   return (
     <>
       <div className="flex flex-col gap-2">
         <span>Camisetas</span>
-        <Button>
+        <Button onClick={onAddShirt}>
           <p className="flex justify-between px-2">
             Adicionar camiseta <span>[ ctrl + shift + alt + ! ]</span>
           </p>
         </Button>
-        <Button>
+        <Button onClick={onRemoveShirt}>
           <p className="flex justify-between px-2">
             Remover camiseta <span>[ ctrl + shift + alt + @ ]</span>
           </p>
@@ -25,12 +37,12 @@ export const ManualCommands = (): JSX.Element => {
       </div>
       <div className="flex flex-col gap-2">
         <span>Apoiadores</span>
-        <Button>
+        <Button onClick={onAddSupporter}>
           <p className="flex justify-between px-2">
             Adicionar apoiador <span>[ ctrl + shift + alt + # ]</span>
           </p>
         </Button>
-        <Button>
+        <Button onClick={onRemoveSupporter}>
           <p className="flex justify-between px-2">
             Remover apoiador <span>[ ctrl + shift + alt + $ ]</span>
           </p>

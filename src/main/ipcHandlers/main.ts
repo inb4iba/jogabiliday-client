@@ -46,4 +46,10 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('customize_bar', (_e, data: CustomizationData) => {
     sendMessage('CUSTOMIZATION', data)
   })
+  ipcMain.on('update_shirts', (_e, data: number) => {
+    sendMessage('SHIRTS', data)
+  })
+  ipcMain.on('update_supporters', (_e, data: number) => {
+    sendMessage('SUPPORTERS', data)
+  })
 }

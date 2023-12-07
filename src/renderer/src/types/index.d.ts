@@ -42,5 +42,7 @@ interface Window {
     startServer: ({ oreloId: string }) => Promise<Data>
     stopServer: () => Promise<Data>
     customizeBar: (data: CustomizationData) => void
+    updateShirts: (data: number) => void
+    updateSupporters: (data: number) => void
   }
 }

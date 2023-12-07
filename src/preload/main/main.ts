@@ -19,5 +19,11 @@ export const mainApi = {
   startServer: (data: { oreloId: string }): Promise<Data> =>
     ipcRenderer.invoke('start_server', data),
   stopServer: (): Promise<string> => ipcRenderer.invoke('stop_server'),
-  customizeBar: (data: CustomizationData): void => ipcRenderer.send('customize_bar', data)
+  customizeBar: (data: CustomizationData): void => ipcRenderer.send('customize_bar', data),
+  updateShirts: (data: number): void => {
+    ipcRenderer.send('update_shirts', data)
+  },
+  updateSupporters: (data: number): void => {
+    ipcRenderer.send('update_supporters', data)
+  }
 }

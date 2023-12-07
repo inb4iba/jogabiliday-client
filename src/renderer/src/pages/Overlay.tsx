@@ -3,6 +3,9 @@ import { GoalBar } from '../components/overlay/GoalBar'
 import { useGoalBarStore } from '@renderer/store/goalBarStore'
 import { Supporters } from '@renderer/components/overlay/Supporters'
 import { Shirts } from '@renderer/components/overlay/Shirts'
+import { useShirtsStore } from '@renderer/store/shirtsStore'
+import { useSupportersStore } from '@renderer/store/supportersStore'
+import { ws } from '@renderer/service/socket'
 
 export const Overlay = (): JSX.Element => {
   const [
@@ -28,17 +31,12 @@ export const Overlay = (): JSX.Element => {
     state.updateTextSize,
     state.updateTextWeight
   ])
+  const updateShirts = useShirtsStore((state) => state.updateShirts)
+  const updateSupporters = useSupportersStore((state) => state.updateSupporters)
 
   useEffect(() => {
-    const ws: WebSocket = new WebSocket('ws://localhost:3000')
-
-    ws.onopen = (): void => {
-      console.log('connected')
-    }
-
     ws.onmessage = (e): void => {
       const { event, args } = JSON.parse(e.data)
-      console.log('EVENT:', event)
       if (event === 'CUSTOMIZATION') {
         const {
           bgColor,
@@ -62,12 +60,16 @@ export const Overlay = (): JSX.Element => {
         updateTextWeight(textWeight)
         updateValueSize(valueSize)
         updateWidth(width)
+      } else if (event === 'SHIRTS') {
+        updateShirts(args[0])
+      } else if (event === 'SUPPORTERS') {
+        updateSupporters(args[0])
       }
     }
   }, [])
 
   return (
-    <div className="p-6 flex flex-col gap-6">
+    <div className="flex flex-col gap-6 p-6">
       <GoalBar />
       <Supporters />
       <Shirts />

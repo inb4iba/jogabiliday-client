@@ -1,12 +1,13 @@
-import { JSX, useRef } from 'react'
+import { useShirtsStore } from '@renderer/store/shirtsStore'
+import { JSX } from 'react'
 
 export const Shirts = (): JSX.Element => {
-  const shirtsRef = useRef<HTMLSpanElement>(null)
+  const shirts = useShirtsStore((state) => state.shirts)
 
   return (
     <section id="shirts" className="flex flex-col">
       <label id="label">CAMISETAS</label>
-      <span ref={shirtsRef}>0</span>
+      <span>{shirts}</span>
     </section>
   )
 }

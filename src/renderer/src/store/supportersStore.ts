@@ -5,18 +5,13 @@ type State = {
 }
 
 type Action = {
-  addSupporter: (value: number) => void
-  removeSupporter: (value: number) => void
+  updateSupporters: (value: number) => void
 }
 
 export const useSupportersStore = create<State & Action>((set) => ({
   supporters: 0,
-  addSupporter: (value): void =>
+  updateSupporters: (value): void =>
     set((state) => ({
       supporters: state.supporters + value
-    })),
-  removeSupporter: (value): void =>
-    set((state) => ({
-      supporters: state.supporters - value
     }))
 }))
