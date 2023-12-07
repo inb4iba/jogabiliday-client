@@ -16,6 +16,13 @@ export const mainApi = {
   onTipaHide: (callback: () => void): IpcRenderer => {
     return ipcRenderer.on('on_tipa_hide', callback)
   },
+  openShirts: (): void => ipcRenderer.send('open_shirts'),
+  closeShirts: (): void => ipcRenderer.send('close_shirts'),
+  showShirts: (): void => ipcRenderer.send('show_shirts'),
+  hideShirts: (): void => ipcRenderer.send('hide_shirts'),
+  onShirtsHide: (callback: () => void): IpcRenderer => {
+    return ipcRenderer.on('on_shirts_hide', callback)
+  },
   startServer: (data: { oreloId: string }): Promise<Data> =>
     ipcRenderer.invoke('start_server', data),
   stopServer: (): Promise<string> => ipcRenderer.invoke('stop_server'),

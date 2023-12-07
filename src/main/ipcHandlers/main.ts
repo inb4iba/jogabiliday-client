@@ -4,6 +4,7 @@ import { startServer, stopServer } from '..'
 import { CustomizationData, Data, ValueData } from '../types/types'
 import { closeTipa, hideTipa, openTipa, showTipa } from '../scrapingWindows/tipa'
 import { sendMessage } from '../server'
+import { closeShirts, hideShirts, openShirts, showShirts } from '../scrapingWindows/shirts'
 
 export const initializeMainHandler = (): void => {
   ipcMain.on('open_orelo', () => {
@@ -29,6 +30,18 @@ export const initializeMainHandler = (): void => {
   })
   ipcMain.on('hide_tipa', () => {
     hideTipa()
+  })
+  ipcMain.on('open_shirts', () => {
+    openShirts()
+  })
+  ipcMain.on('close_shirts', () => {
+    closeShirts()
+  })
+  ipcMain.on('show_shirts', () => {
+    showShirts()
+  })
+  ipcMain.on('hide_shirts', () => {
+    hideShirts()
   })
   ipcMain.handle('start_server', async (_e, data): Promise<Data> => {
     return startServer(data['oreloId'])
