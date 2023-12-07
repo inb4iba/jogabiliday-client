@@ -1,4 +1,4 @@
-export type WindowTitle = 'MAIN' | 'ORELO' | 'TIPA'
+export type WindowTitle = 'MAIN' | 'ORELO' | 'TIPA' | 'SHIRTS'
 
 type CustomizationData = {
   bgColor: string

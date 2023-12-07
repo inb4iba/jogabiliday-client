@@ -6,7 +6,7 @@ type Data = {
 }
 
 type ValueData = {
-  from: 'ORELO' | 'TIPA' | 'MANUAL'
+  from: 'ORELO' | 'TIPA' | 'MANUAL' | 'SHIRTS'
   supporters?: string
   value: string
 }

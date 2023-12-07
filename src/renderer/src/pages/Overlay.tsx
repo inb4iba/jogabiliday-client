@@ -35,7 +35,11 @@ export const Overlay = (): JSX.Element => {
     state.updateTextWeight,
     state.updateTotalValue
   ])
-  const updateShirts = useShirtsStore((state) => state.updateShirts)
+  const [updateShirts, oldShirts, updateOldShirts] = useShirtsStore((state) => [
+    state.updateShirts,
+    state.oldShirts,
+    state.updateOldShirts
+  ])
   const updateSupporters = useSupportersStore((state) => state.updateSupporters)
   const [oldTipaValue, setOldTipaValue] = useTipaStore((state) => [
     state.oldValue,
@@ -72,9 +76,9 @@ export const Overlay = (): JSX.Element => {
         updateValueSize(valueSize)
         updateWidth(width)
       } else if (event === 'SHIRTS') {
-        updateShirts(args[0])
+        updateShirts(+args[0])
       } else if (event === 'SUPPORTERS') {
-        updateSupporters(args[0])
+        updateSupporters(+args[0])
       } else if (event === 'VALUE') {
         const data = args[0] as ValueData
         switch (data.from) {
@@ -86,6 +90,9 @@ export const Overlay = (): JSX.Element => {
             break
           case 'TIPA':
             updateTipa(data)
+            break
+          case 'SHIRTS':
+            updateShirtsFromSite(data)
             break
         }
       }
@@ -104,6 +111,7 @@ export const Overlay = (): JSX.Element => {
       setOldOreloValue(value)
     }
     if (oldSupporters !== supporters) {
+      console.log(oldSupporters, supporters)
       updateSupporters(oldSupporters - supporters)
       setOldSupporters(supporters)
     }
@@ -114,6 +122,14 @@ export const Overlay = (): JSX.Element => {
     if (oldTipaValue !== value) {
       updateTotalValue(oldTipaValue - value)
       setOldTipaValue(value)
+    }
+  }
+
+  const updateShirtsFromSite = (data: ValueData): void => {
+    console.log(data)
+    const value = +data.value
+    if (oldShirts !== value) {
+      updateOldShirts(value)
     }
   }
 

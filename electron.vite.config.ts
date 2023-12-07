@@ -14,6 +14,7 @@ export default defineConfig({
           main: resolve(__dirname, 'src/preload/main/preload.ts'),
           orelo: resolve(__dirname, 'src/preload/orelo/preload.ts'),
           tipa: resolve(__dirname, 'src/preload/tipa/preload.ts'),
+          shirts: resolve(__dirname, 'src/preload/shirts/preload.ts'),
           oreloView: resolve(__dirname, 'src/preload/orelo/orelo.ts'),
           tipaView: resolve(__dirname, 'src/preload/tipa/tipa.ts')
         }

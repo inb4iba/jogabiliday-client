@@ -8,6 +8,8 @@ import { Data, WindowTitle } from './types/types'
 import { checkOreloErrors, startOreloScraping, stopOreloScraping } from './scrapingWindows/orelo'
 import { checkTipaErrors, startTipaScraping, stopTipaScraping } from './scrapingWindows/tipa'
 import { closeServer, initializeServer } from './server'
+import 'dotenv/config'
+import { checkShirtsErrors, startShirtsScraping } from './scrapingWindows/shirts'
 
 let mainWindow: BrowserWindow
 
@@ -19,8 +21,10 @@ export const startServer = async (oreloId: string): Promise<Data> => {
   try {
     await checkOreloErrors(oreloId)
     await checkTipaErrors()
+    await checkShirtsErrors()
     startOreloScraping()
     startTipaScraping()
+    startShirtsScraping()
     return { type: 'data', data: { message: 'connected' } }
   } catch (error) {
     if (error instanceof Error) return { type: 'error', data: { message: error.message } }
