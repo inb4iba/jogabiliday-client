@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
+import { persistNSync } from 'persist-and-sync'
 
 type State = {
   bgColor: string
@@ -34,71 +34,35 @@ type Action = {
 }
 
 export const useGoalBarStore = create<State & Action>()(
-  immer((set) => ({
-    bgColor: '#261752',
-    fillColor: '#42FFEB',
-    border: 4,
-    height: 60,
-    paddingH: 8,
-    paddingV: 8,
-    textSize: 18,
-    textWeight: 500,
-    valueSize: 32,
-    width: 400,
-    totalValue: 950,
-    goalValue: 1000,
-    previousValue: 0,
-    updateBgColor: (color): void =>
-      set((state) => {
-        state.bgColor = color
-      }),
-    updateFillColor: (color): void =>
-      set((state) => {
-        state.fillColor = color
-      }),
-    updateBorder: (border): void =>
-      set((state) => {
-        state.border = border
-      }),
-    updateHeight: (height): void =>
-      set((state) => {
-        state.height = height
-      }),
-    updatePaddingH: (padding): void =>
-      set((state) => {
-        state.paddingH = padding
-      }),
-    updatePaddingV: (padding): void =>
-      set((state) => {
-        state.paddingV = padding
-      }),
-    updateTextSize: (textSize): void =>
-      set((state) => {
-        state.textSize = textSize
-      }),
-    updateTextWeight: (textWeight): void =>
-      set((state) => {
-        state.textWeight = textWeight
-      }),
-    updateValueSize: (valueSize): void =>
-      set((state) => {
-        state.valueSize = valueSize
-      }),
-    updateWidth: (width): void =>
-      set((state) => {
-        state.width = width
-      }),
-    updateTotalValue: (value): void =>
-      set((state) => {
-        state.totalValue += value
-      }),
-    updateGoalValue: (value): void =>
-      set((state) => {
-        state.goalValue = value
-      }),
-    updatePreviousValue: (value): void =>
-      set((state) => {
-        state.previousValue = value
-      })
-  }))
+  persistNSync(
+    (set) => ({
+      bgColor: '#261752',
+      fillColor: '#42FFEB',
+      border: 4,
+      height: 60,
+      paddingH: 8,
+      paddingV: 8,
+      textSize: 18,
+      textWeight: 500,
+      valueSize: 32,
+      width: 400,
+      totalValue: 950,
+      goalValue: 1000,
+      previousValue: 0,
+      updateBgColor: (color): void => set(() => ({ bgColor: color })),
+      updateFillColor: (color): void => set(() => ({ fillColor: color })),
+      updateBorder: (border): void => set(() => ({ border })),
+      updateHeight: (height): void => set(() => ({ height })),
+      updatePaddingH: (padding): void => set(() => ({ paddingH: padding })),
+      updatePaddingV: (padding): void => set(() => ({ paddingV: padding })),
+      updateTextSize: (textSize): void => set(() => ({ textSize })),
+      updateTextWeight: (textWeight): void => set(() => ({ textWeight })),
+      updateValueSize: (valueSize): void => set(() => ({ valueSize })),
+      updateWidth: (width): void => set(() => ({ width })),
+      updateTotalValue: (value): void => set((state) => ({ totalValue: state.totalValue + value })),
+      updateGoalValue: (value): void => set(() => ({ goalValue: value })),
+      updatePreviousValue: (value): void => set(() => ({ previousValue: value }))
+    }),
+    { name: 'jogabiliday_goal_bar' }
+  )
 )
