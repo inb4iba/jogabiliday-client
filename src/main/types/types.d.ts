@@ -32,7 +32,7 @@ export type Data = {
 }
 
 type OreloData = {
-  contributors: string
+  supporters: string
   value: string
 }
 

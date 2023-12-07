@@ -45,10 +45,10 @@ export const startOreloScraping = (): void => {
     await sleep(5000)
     view.webContents.executeJavaScript(`
       const cards = [...document.querySelectorAll('.MuiCard-root')]
-      const [contributors, value] = cards.filter(card =>
+      const [supporters, value] = cards.filter(card =>
         card.children[0].textContent.toLowerCase().includes('apoi')).map(card =>
         card.children[1].textContent)
-      window.oreloApi.sendData({contributors, value})
+      window.oreloApi.sendData({supporters, value})
     `)
   }, 60000)
 }

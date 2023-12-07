@@ -37,16 +37,13 @@ export const initializeMainHandler = (): void => {
     return stopServer()
   })
   ipcMain.on('orelo_data', (_e, data: OreloData) => {
-    // console.log('Orelo: ', 'apoiadores', data.contributors, 'valor', data.value)
     sendMessage('VALUE', data.value)
-    sendMessage('CONTRIBUTORS', data.contributors)
+    sendMessage('SUPPORTERS', data.supporters)
   })
   ipcMain.on('tipa_data', (_e, data: TipaData) => {
-    // console.log('Tipa Ai: ', 'valor', data.value)
     sendMessage('VALUE', data.value)
   })
   ipcMain.on('customize_bar', (_e, data: CustomizationData) => {
-    // console.log('Tipa Ai: ', 'valor', data.value)
     sendMessage('CUSTOMIZATION', data)
   })
 }
