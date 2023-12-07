@@ -75,7 +75,7 @@ export const GoalBar = (): JSX.Element => {
   ])
 
   return (
-    <section className="p-6" id="goal-bar">
+    <section id="goal-bar">
       <span id="total-value" ref={totalValueRef}>
         {totalValue}
       </span>
