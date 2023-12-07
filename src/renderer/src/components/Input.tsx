@@ -6,7 +6,7 @@ type Props = {
   value?: string
   placeholder?: string
   _ref: RefObject<HTMLInputElement>
-  onChange: () => void
+  onChange?: () => void
 }
 
 export const Input = (props: Props): JSX.Element => {
