@@ -95,5 +95,6 @@ interface Window {
     updateTotalValue: (data: ValueData) => void
     updateGoals: (data: Goal[]) => void
     updateSelectedSites: (data: { orelo: boolean; tipa: boolean; shirts: boolean }) => void
+    resetCache: () => void
   }
 }

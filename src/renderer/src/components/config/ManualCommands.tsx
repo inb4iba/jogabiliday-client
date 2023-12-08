@@ -42,6 +42,10 @@ export const ManualCommands = (): JSX.Element => {
       })
   }
 
+  const resetCache = (): void => {
+    window.mainApi.resetCache()
+  }
+
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -91,6 +95,7 @@ export const ManualCommands = (): JSX.Element => {
         <Checkbox value={true} label="Tipa Ai" _ref={tipaRef} onChange={onChangeSites} />
         <Checkbox value={true} label="Camisetas" _ref={shirtsRef} onChange={onChangeSites} />
       </div>
+      <Button onClick={resetCache}>Limpar cache</Button>
     </>
   )
 }

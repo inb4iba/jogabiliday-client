@@ -24,6 +24,7 @@ export const sendMessage = async (
     | 'CUSTOMIZATION:SUPPORTERS'
     | 'SUPPORTERS'
     | 'SHIRTS'
+    | 'RESET_CACHE'
     | 'GOALS',
   ...args
 ): Promise<void> => {

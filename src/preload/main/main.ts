@@ -48,5 +48,8 @@ export const mainApi = {
   },
   updateSelectedSites: (data: { orelo: boolean; tipa: boolean; shirts: boolean }): void => {
     ipcRenderer.send('update_selected_sites', data)
+  },
+  resetCache: (): void => {
+    ipcRenderer.send('reset_cache')
   }
 }

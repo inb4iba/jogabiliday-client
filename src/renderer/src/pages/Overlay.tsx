@@ -175,6 +175,8 @@ export const Overlay = (): JSX.Element => {
         updateShirts(+args[0])
       } else if (event === 'SUPPORTERS') {
         updateSupporters(+args[0])
+      } else if (event === 'RESET_CACHE') {
+        localStorage.clear()
       } else if (event === 'VALUE') {
         const data = args[0] as ValueData
         switch (data.from) {

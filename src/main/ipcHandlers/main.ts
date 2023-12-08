@@ -88,4 +88,7 @@ export const initializeMainHandler = (): void => {
       updateActiveSites(data)
     }
   )
+  ipcMain.on('reset_cache', () => {
+    sendMessage('RESET_CACHE')
+  })
 }
