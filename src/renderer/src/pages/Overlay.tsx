@@ -203,7 +203,7 @@ export const Overlay = (): JSX.Element => {
   }
 
   const updateOrelo = (data: ValueData): void => {
-    const value = +data.value.replace('R$', '').trim().replace(',', '.')
+    const value = +data.value.replace('R$', '').trim().replace('.', '').replace(',', '.')
     const supporters = data.supporters ? +data.supporters : 0
     if (oldOreloValue !== value) {
       updateTotalValue(oldOreloValue - value)
@@ -217,7 +217,7 @@ export const Overlay = (): JSX.Element => {
   }
 
   const updateTipa = (data: ValueData): void => {
-    const value = +data.value.replace('R$', '').trim().replace(',', '.')
+    const value = +data.value.replace('R$', '').trim().replace('.', '').replace(',', '.')
     if (oldTipaValue !== value) {
       updateTotalValue(oldTipaValue - value)
       setOldTipaValue(value)

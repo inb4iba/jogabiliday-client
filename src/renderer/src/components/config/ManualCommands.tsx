@@ -1,9 +1,13 @@
 import { JSX, useRef } from 'react'
 import { Button } from '../Button'
 import { Input } from '../Input'
+import { Checkbox } from '../Checkbox'
 
 export const ManualCommands = (): JSX.Element => {
   const valueRef = useRef<HTMLInputElement>(null)
+  const oreloRef = useRef<HTMLInputElement>(null)
+  const tipaRef = useRef<HTMLInputElement>(null)
+  const shirtsRef = useRef<HTMLInputElement>(null)
 
   const addValue = (): void => {
     if (valueRef.current && !isNaN(+valueRef.current.value))
@@ -27,6 +31,15 @@ export const ManualCommands = (): JSX.Element => {
   }
   const onRemoveSupporter = (): void => {
     window.mainApi.updateSupporters(-1)
+  }
+
+  const onChangeSites = (): void => {
+    if (oreloRef.current && tipaRef.current && shirtsRef.current)
+      window.mainApi.updateSelectedSites({
+        orelo: oreloRef.current.checked,
+        tipa: tipaRef.current.checked,
+        shirts: shirtsRef.current.checked
+      })
   }
 
   return (
@@ -72,6 +85,11 @@ export const ManualCommands = (): JSX.Element => {
             Remover
           </Button>
         </div>
+      </div>
+      <div className="flex flex-col gap-1">
+        <Checkbox value={true} label="Orelo" _ref={oreloRef} onChange={onChangeSites} />
+        <Checkbox value={true} label="Tipa Ai" _ref={tipaRef} onChange={onChangeSites} />
+        <Checkbox value={true} label="Camisetas" _ref={shirtsRef} onChange={onChangeSites} />
       </div>
     </>
   )

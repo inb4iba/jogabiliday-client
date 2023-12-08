@@ -94,5 +94,6 @@ interface Window {
     updateSupporters: (data: number) => void
     updateTotalValue: (data: ValueData) => void
     updateGoals: (data: Goal[]) => void
+    updateSelectedSites: (data: { orelo: boolean; tipa: boolean; shirts: boolean }) => void
   }
 }

@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron'
 import { closeOrelo, hideOrelo, openOrelo, showOrelo } from '../scrapingWindows/orelo'
-import { startServer, stopServer } from '..'
+import { startServer, stopServer, updateActiveSites } from '..'
 import { CustomizationListData, Data, ValueData } from '../types/types'
 import { closeTipa, hideTipa, openTipa, showTipa } from '../scrapingWindows/tipa'
 import { sendMessage } from '../server'
@@ -82,4 +82,10 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('update_goals', (_e, data: Goal[]) => {
     sendMessage('GOALS', data)
   })
+  ipcMain.on(
+    'update_selected_sites',
+    (_e, data: { orelo: boolean; tipa: boolean; shirts: boolean }) => {
+      updateActiveSites(data)
+    }
+  )
 }

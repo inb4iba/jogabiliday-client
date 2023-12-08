@@ -12,19 +12,36 @@ import 'dotenv/config'
 import { checkShirtsErrors, startShirtsScraping } from './scrapingWindows/shirts'
 
 let mainWindow: BrowserWindow
+let activeSites: { orelo: boolean; tipa: boolean; shirts: boolean }
 
 export const sendHideWindow = (title: WindowTitle): void => {
   mainWindow.webContents.send(`on_${title.toLowerCase()}_hide`)
 }
 
+export const updateActiveSites = (data: {
+  orelo: boolean
+  tipa: boolean
+  shirts: boolean
+}): void => {
+  activeSites = data
+}
+
 export const startServer = async (oreloId: string): Promise<Data> => {
   try {
-    await checkOreloErrors(oreloId)
-    await checkTipaErrors()
-    await checkShirtsErrors()
-    startOreloScraping()
-    startTipaScraping()
-    startShirtsScraping()
+    if (activeSites) {
+      if (activeSites.orelo) {
+        await checkOreloErrors(oreloId)
+        startOreloScraping()
+      }
+      if (activeSites.tipa) {
+        await checkTipaErrors()
+        startTipaScraping()
+      }
+      if (activeSites.shirts) {
+        await checkShirtsErrors()
+        startShirtsScraping()
+      }
+    }
     return { type: 'data', data: { message: 'connected' } }
   } catch (error) {
     if (error instanceof Error) return { type: 'error', data: { message: error.message } }

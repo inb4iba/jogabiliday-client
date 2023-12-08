@@ -45,5 +45,8 @@ export const mainApi = {
   },
   updateGoals: (data: Goal[]): void => {
     ipcRenderer.send('update_goals', data)
+  },
+  updateSelectedSites: (data: { orelo: boolean; tipa: boolean; shirts: boolean }): void => {
+    ipcRenderer.send('update_selected_sites', data)
   }
 }
