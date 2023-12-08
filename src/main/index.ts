@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, globalShortcut } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -7,7 +7,7 @@ import { initializeMainHandler } from './ipcHandlers/main'
 import { Data, WindowTitle } from './types/types'
 import { checkOreloErrors, startOreloScraping, stopOreloScraping } from './scrapingWindows/orelo'
 import { checkTipaErrors, startTipaScraping, stopTipaScraping } from './scrapingWindows/tipa'
-import { closeServer, initializeServer } from './server'
+import { closeServer, initializeServer, sendMessage } from './server'
 import 'dotenv/config'
 import { checkShirtsErrors, startShirtsScraping } from './scrapingWindows/shirts'
 
@@ -45,6 +45,19 @@ export const stopServer = async (): Promise<Data> => {
 }
 
 function createWindow(): void {
+  globalShortcut.register('CommandOrControl+Alt+PageUp', () => {
+    sendMessage('SHIRTS', 1)
+  })
+  globalShortcut.register('CommandOrControl+Alt+PageDown', () => {
+    sendMessage('SHIRTS', -1)
+  })
+  globalShortcut.register('CommandOrControl+Alt+Home', () => {
+    sendMessage('SUPPORTERS', 1)
+  })
+  globalShortcut.register('CommandOrControl+Alt+End', () => {
+    sendMessage('SUPPORTERS', -1)
+  })
+
   mainWindow = new BrowserWindow({
     title: 'Jogabiliday Client',
     width: 480,

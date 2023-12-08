@@ -34,26 +34,30 @@ export const ManualCommands = (): JSX.Element => {
       <div className="flex flex-col gap-2">
         <span>Camisetas</span>
         <Button onClick={onAddShirt}>
-          <p className="flex justify-between px-2">
-            Adicionar camiseta <span>[ ctrl + shift + alt + ! ]</span>
+          <p className="flex items-center justify-between px-2">
+            Adicionar camiseta{' '}
+            <span className="text-xs font-medium text-zinc-400">CTRL + ALT + HOME</span>
           </p>
         </Button>
         <Button onClick={onRemoveShirt}>
-          <p className="flex justify-between px-2">
-            Remover camiseta <span>[ ctrl + shift + alt + @ ]</span>
+          <p className="flex items-center justify-between px-2">
+            Remover camiseta{' '}
+            <span className="text-xs font-medium text-zinc-400">CTRL + ALT + END</span>
           </p>
         </Button>
       </div>
       <div className="flex flex-col gap-2">
         <span>Apoiadores</span>
         <Button onClick={onAddSupporter}>
-          <p className="flex justify-between px-2">
-            Adicionar apoiador <span>[ ctrl + shift + alt + # ]</span>
+          <p className="flex items-center justify-between px-2">
+            Adicionar apoiador{' '}
+            <span className="text-xs font-medium text-zinc-400">CTRL + ALT + PAGE UP</span>
           </p>
         </Button>
         <Button onClick={onRemoveSupporter}>
-          <p className="flex justify-between px-2">
-            Remover apoiador <span>[ ctrl + shift + alt + $ ]</span>
+          <p className="flex items-center justify-between px-2">
+            Remover apoiador{' '}
+            <span className="text-xs font-medium text-zinc-400 ">CTRL + ALT + PAGE DOWN</span>
           </p>
         </Button>
       </div>
