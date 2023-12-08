@@ -116,19 +116,25 @@ export const GoalBar = (): JSX.Element => {
   }
 
   return (
-    <section id="goal-bar">
+    <section id="goal-bar" className="font-mono-rgo">
       <span id="total-value" ref={totalValueRef}>
         {totalValue}
       </span>
       <div ref={barRef} className="relative overflow-hidden">
-        <span className="absolute z-10 whitespace-nowrap" ref={descriptionRef}>
+        <span
+          className="absolute z-10 uppercase whitespace-nowrap font-rolanti"
+          ref={descriptionRef}
+        >
           {actualGoal?.title}
         </span>
         <span className="absolute z-10 whitespace-nowrap" ref={goalValueRef}>
           {goalValue}
         </span>
         <div className="relative overflow-hidden" ref={fillRef}>
-          <span className="absolute z-10 whitespace-nowrap" ref={darkDescriptionRef}>
+          <span
+            className="absolute z-10 uppercase whitespace-nowrap font-rolanti"
+            ref={darkDescriptionRef}
+          >
             {actualGoal?.title}
           </span>
           <span className="absolute z-10 whitespace-nowrap" ref={darkValueRef}>

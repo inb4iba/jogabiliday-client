@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './assets/index.css'
+import './assets/fonts/Rolanti.otf'
 import { App } from './App'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { External } from './pages/External'

@@ -8,6 +8,35 @@
   }
 }
 
+@font-face {
+  font-family: 'Rolanti';
+  src:
+    local('Rolanti'),
+    url('./assets/fonts/Rolanti.otf') format('opentype');
+  font-weight: thin;
+}
+
+@font-face {
+  font-family: 'MONO-RGO MODULAR';
+  src: url('https://db.onlinewebfonts.com/t/6a65a2be95ec73e531174ea7092332b2.eot');
+  src:
+    url('https://db.onlinewebfonts.com/t/6a65a2be95ec73e531174ea7092332b2.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/6a65a2be95ec73e531174ea7092332b2.woff2') format('woff2'),
+    url('https://db.onlinewebfonts.com/t/6a65a2be95ec73e531174ea7092332b2.woff') format('woff'),
+    url('https://db.onlinewebfonts.com/t/6a65a2be95ec73e531174ea7092332b2.ttf') format('truetype'),
+    url('https://db.onlinewebfonts.com/t/6a65a2be95ec73e531174ea7092332b2.svg#MONO-RGO MODULAR')
+      format('svg');
+}
+
+.font-rolanti {
+  font-family: 'Rolanti';
+}
+
+.font-mono-rgo {
+  font-family: 'MONO-RGO MODULAR';
+}
+
 .draggable {
   -webkit-app-region: drag;
 }
