@@ -3,6 +3,7 @@ import { Accordion } from '../Accordion'
 import { GoalBarConfig } from '../config/GoalBar'
 import { ManualCommands } from '../config/ManualCommands'
 import { GoalListConfig } from '../config/GoalsList'
+// import { ShirtsConfig } from '../config/Shirts'
 
 export const ConfigSection = (): JSX.Element => {
   return (
