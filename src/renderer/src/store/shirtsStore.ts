@@ -4,11 +4,19 @@ import { persistNSync } from 'persist-and-sync'
 type State = {
   shirts: number
   oldShirts: number
+  fontSize: number
+  fontWeight: number
+  showLabel: boolean
+  color: string
 }
 
 type Action = {
   updateShirts: (value: number) => void
   updateOldShirts: (value: number) => void
+  updateFontSize: (value: number) => void
+  updateFontWeight: (value: number) => void
+  updateShowLabel: (value: boolean) => void
+  updateColor: (value: string) => void
 }
 
 export const useShirtsStore = create<State & Action>(
@@ -16,6 +24,10 @@ export const useShirtsStore = create<State & Action>(
     (set) => ({
       shirts: 0,
       oldShirts: 0,
+      fontSize: 36,
+      fontWeight: 400,
+      showLabel: true,
+      color: '#42FFEB',
       updateShirts: (value): void =>
         set((state) => ({
           shirts: state.shirts + value
@@ -23,6 +35,22 @@ export const useShirtsStore = create<State & Action>(
       updateOldShirts: (value): void =>
         set(() => ({
           oldShirts: value
+        })),
+      updateFontSize: (value): void =>
+        set(() => ({
+          fontSize: value
+        })),
+      updateFontWeight: (value): void =>
+        set(() => ({
+          fontWeight: value
+        })),
+      updateShowLabel: (value): void =>
+        set(() => ({
+          showLabel: value
+        })),
+      updateColor: (value): void =>
+        set(() => ({
+          color: value
         }))
     }),
     { name: 'jogabiliday_shirts' }

@@ -35,6 +35,20 @@ type CustomizationListData = {
   listSize: number
 }
 
+type CustomizationShirtData = {
+  color: string
+  fontSize: number
+  fontWeight: number
+  showLabel: boolean
+}
+
+type CustomizationSupportersData = {
+  color: string
+  fontSize: number
+  fontWeight: number
+  showLabel: boolean
+}
+
 interface Window {
   windowApi: {
     minimize: () => void
@@ -60,6 +74,8 @@ interface Window {
     stopServer: () => Promise<Data>
     customizeBar: (data: CustomizationBarData) => void
     customizeList: (data: CustomizationListData) => void
+    customizeShirt: (data: CustomizationShirtData) => void
+    customizeSupporters: (data: CustomizationSupportersData) => void
     updateShirts: (data: number) => void
     updateSupporters: (data: number) => void
     updateTotalValue: (data: ValueData) => void

@@ -38,12 +38,36 @@ export const Overlay = (): JSX.Element => {
     state.updateTextWeight,
     state.updateTotalValue
   ])
-  const [updateShirts, oldShirts, updateOldShirts] = useShirtsStore((state) => [
+  const [
+    updateShirts,
+    oldShirts,
+    updateOldShirts,
+    updateShirtsColor,
+    updateShirtsFontSize,
+    updateShirtsFontWeight,
+    updateShirtsShowLabel
+  ] = useShirtsStore((state) => [
     state.updateShirts,
     state.oldShirts,
-    state.updateOldShirts
+    state.updateOldShirts,
+    state.updateColor,
+    state.updateFontSize,
+    state.updateFontWeight,
+    state.updateShowLabel
   ])
-  const updateSupporters = useSupportersStore((state) => state.updateSupporters)
+  const [
+    updateSupporters,
+    updateSupportersColor,
+    updateSupportersFontSize,
+    updateSupportersFontWeight,
+    updateSupportersShowLabel
+  ] = useSupportersStore((state) => [
+    state.updateSupporters,
+    state.updateColor,
+    state.updateFontSize,
+    state.updateFontWeight,
+    state.updateShowLabel
+  ])
   const [oldTipaValue, setOldTipaValue] = useTipaStore((state) => [
     state.oldValue,
     state.setOldValue
@@ -88,6 +112,20 @@ export const Overlay = (): JSX.Element => {
         const { listSize, nextGoalsAmount } = args[0] as CustomizationListData
         updateListSize(listSize)
         updateNextGoalsAmount(nextGoalsAmount)
+      } else if (event === 'CUSTOMIZATION:SHIRTS') {
+        console.log('shirts', args[0])
+        const { color, fontSize, fontWeight, showLabel } = args[0] as CustomizationShirtData
+        updateShirtsColor(color)
+        updateShirtsFontSize(fontSize)
+        updateShirtsFontWeight(fontWeight)
+        updateShirtsShowLabel(showLabel)
+      } else if (event === 'CUSTOMIZATION:SUPPORTERS') {
+        console.log('supporters', args[0])
+        const { color, fontSize, fontWeight, showLabel } = args[0] as CustomizationSupportersData
+        updateSupportersColor(color)
+        updateSupportersFontSize(fontSize)
+        updateSupportersFontWeight(fontWeight)
+        updateSupportersShowLabel(showLabel)
       } else if (event === 'SHIRTS') {
         updateShirts(+args[0])
       } else if (event === 'SUPPORTERS') {

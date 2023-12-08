@@ -1,9 +1,9 @@
 import { JSX, useEffect, useRef, useState } from 'react'
 import { Input } from '../Input'
-import { useShirtsStore } from '@renderer/store/shirtsStore'
 import { Checkbox } from '../Checkbox'
+import { useSupportersStore } from '@renderer/store/supportersStore'
 
-export const ShirtsConfig = (): JSX.Element => {
+export const SupportersConfig = (): JSX.Element => {
   const fontSizeRef = useRef<HTMLInputElement>(null)
   const fontWeightRef = useRef<HTMLInputElement>(null)
   const showLabelRef = useRef<HTMLInputElement>(null)
@@ -17,7 +17,7 @@ export const ShirtsConfig = (): JSX.Element => {
     updateFontWeight,
     updateShowLabel,
     updateColor
-  ] = useShirtsStore((state) => [
+  ] = useSupportersStore((state) => [
     state.fontSize,
     state.fontWeight,
     state.showLabel,
@@ -30,7 +30,7 @@ export const ShirtsConfig = (): JSX.Element => {
   const [timeoutHandler, setTimeoutHandler] = useState<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    window.mainApi.customizeShirt({ fontSize, fontWeight, showLabel, color })
+    window.mainApi.customizeSupporters({ fontSize, fontWeight, showLabel, color })
   }, [fontSize, fontWeight, showLabel, color])
 
   const customizeShirts = (): void => {

@@ -3,7 +3,8 @@ import { Accordion } from '../Accordion'
 import { GoalBarConfig } from '../config/GoalBar'
 import { ManualCommands } from '../config/ManualCommands'
 import { GoalListConfig } from '../config/GoalsList'
-// import { ShirtsConfig } from '../config/Shirts'
+import { ShirtsConfig } from '../config/Shirts'
+import { SupportersConfig } from '../config/Supporters'
 
 export const ConfigSection = (): JSX.Element => {
   return (
@@ -13,6 +14,12 @@ export const ConfigSection = (): JSX.Element => {
       </Accordion>
       <Accordion title="Lista de Metas">
         <GoalListConfig />
+      </Accordion>
+      <Accordion title="Camisetas">
+        <ShirtsConfig />
+      </Accordion>
+      <Accordion title="Apoiadores">
+        <SupportersConfig />
       </Accordion>
       <Accordion title="Alterar manualmente">
         <ManualCommands />

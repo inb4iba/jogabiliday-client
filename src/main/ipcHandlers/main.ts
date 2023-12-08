@@ -61,6 +61,12 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('customize_list', (_e, data: CustomizationListData) => {
     sendMessage('CUSTOMIZATION:LIST', data)
   })
+  ipcMain.on('customize_shirts', (_e, data: CustomizationShirtData) => {
+    sendMessage('CUSTOMIZATION:SHIRTS', data)
+  })
+  ipcMain.on('customize_supporters', (_e, data: CustomizationSupportersData) => {
+    sendMessage('CUSTOMIZATION:SUPPORTERS', data)
+  })
   ipcMain.on('update_shirts', (_e, data: number) => {
     sendMessage('SHIRTS', data)
   })
