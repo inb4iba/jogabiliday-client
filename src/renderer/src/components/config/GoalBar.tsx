@@ -68,10 +68,10 @@ export const GoalBarConfig = (): JSX.Element => {
     const handler = setTimeout(() => {
       const colorRegex = /^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
 
-      if (bgColorRef.current && !bgColorRef.current.value.match(colorRegex)) {
+      if (bgColorRef.current && bgColorRef.current.value.match(colorRegex)) {
         updateBgColor(bgColorRef.current.value)
       }
-      if (fillColorRef.current && !fillColorRef.current.value.match(colorRegex)) {
+      if (fillColorRef.current && fillColorRef.current.value.match(colorRegex)) {
         updateFillColor(fillColorRef.current.value)
       }
       if (widthRef.current && !isNaN(+widthRef.current.value)) {

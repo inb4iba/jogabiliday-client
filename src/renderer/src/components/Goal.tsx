@@ -8,12 +8,6 @@ type Props = {
   onDelete: (id: number) => void
 }
 
-export type Goal = {
-  id: number
-  title?: string
-  value?: number
-}
-
 export const Goal = ({ goal, onUpdate, onDelete }: Props): JSX.Element => {
   const titleRef = useRef<HTMLInputElement>(null)
   const valueRef = useRef<HTMLInputElement>(null)

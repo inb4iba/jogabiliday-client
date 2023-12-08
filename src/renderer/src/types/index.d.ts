@@ -11,6 +11,12 @@ type ValueData = {
   value: string
 }
 
+type Goal = {
+  id: number
+  title?: string
+  value?: number
+}
+
 type CustomizationData = {
   bgColor: string
   fillColor: string
@@ -51,5 +57,6 @@ interface Window {
     updateShirts: (data: number) => void
     updateSupporters: (data: number) => void
     updateTotalValue: (data: ValueData) => void
+    updateGoals: (data: Goal[]) => void
   }
 }

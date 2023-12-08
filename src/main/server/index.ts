@@ -15,7 +15,7 @@ export const initializeServer = async (): Promise<void> => {
 }
 
 export const sendMessage = async (
-  event: 'VALUE' | 'CUSTOMIZATION' | 'SUPPORTERS' | 'SHIRTS',
+  event: 'VALUE' | 'CUSTOMIZATION' | 'SUPPORTERS' | 'SHIRTS' | 'GOALS',
   ...args
 ): Promise<void> => {
   const data = {

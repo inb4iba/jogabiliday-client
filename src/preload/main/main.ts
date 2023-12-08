@@ -35,5 +35,8 @@ export const mainApi = {
   },
   updateTotalValue: (data: ValueData): void => {
     ipcRenderer.send('update_total_value', data)
+  },
+  updateGoals: (data: Goal[]): void => {
+    ipcRenderer.send('update_goals', data)
   }
 }
