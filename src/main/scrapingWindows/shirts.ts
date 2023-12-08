@@ -7,7 +7,11 @@ import { sendMessage } from '../server'
 let shirtsWindow: BrowserWindow | undefined
 let removeListeners: () => void | undefined
 let intervalHandler: ReturnType<typeof setInterval>
-const links = process.env.SHIRTS_LINKS?.split(',')
+// const links = process.env.SHIRTS_LINKS?.split(',')
+const links =
+  'https://asbaratas.com.br/loja/monitor-vendas/?tk=99b450da1792d365000506ccddfd333b&mode=live&start=2023-12-01&end=2023-12-11&pid=81062,https://asbaratas.com.br/loja/monitor-vendas/?tk=99b450da1792d365000506ccddfd333b&mode=live&start=2023-12-01&end=2023-12-11&pid=75530,https://asbaratas.com.br/loja/monitor-vendas/?tk=99b450da1792d365000506ccddfd333b&mode=live&start=2023-12-01&end=2023-12-11&pid=85324,https://asbaratas.com.br/loja/monitor-vendas/?tk=99b450da1792d365000506ccddfd333b&mode=live&start=2023-12-01&end=2023-12-11&pid=76847'.split(
+    ','
+  )
 
 export const openShirts = (): void => {
   if (!shirtsWindow) createWindow()
