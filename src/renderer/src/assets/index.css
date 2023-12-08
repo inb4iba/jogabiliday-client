@@ -35,10 +35,6 @@
   );
 }
 
-body {
-  background: #000;
-}
-
 ::-webkit-scrollbar {
   @apply w-3;
 }

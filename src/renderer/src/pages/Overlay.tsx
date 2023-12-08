@@ -10,6 +10,7 @@ import { useOreloStore } from '@renderer/store/oreloStore'
 import { useTipaStore } from '@renderer/store/tipaStore'
 import { useGoalsStore } from '@renderer/store/goalsStore'
 import { GoalsList } from '@renderer/components/overlay/GoalsList'
+import { useGoalsListStore } from '@renderer/store/goalsListStore'
 
 export const Overlay = (): JSX.Element => {
   const [
@@ -52,10 +53,15 @@ export const Overlay = (): JSX.Element => {
   )
   const updateGoals = useGoalsStore((state) => state.setGoals)
 
+  const [updateListSize, updateNextGoalsAmount] = useGoalsListStore((state) => [
+    state.updateListSize,
+    state.updateNextGoalsAmount
+  ])
+
   useEffect(() => {
     ws.onmessage = (e): void => {
       const { event, args } = JSON.parse(e.data)
-      if (event === 'CUSTOMIZATION') {
+      if (event === 'CUSTOMIZATION:BAR') {
         const {
           bgColor,
           fillColor,
@@ -78,6 +84,10 @@ export const Overlay = (): JSX.Element => {
         updateTextWeight(textWeight)
         updateValueSize(valueSize)
         updateWidth(width)
+      } else if (event === 'CUSTOMIZATION:LIST') {
+        const { listSize, nextGoalsAmount } = args[0] as CustomizationListData
+        updateListSize(listSize)
+        updateNextGoalsAmount(nextGoalsAmount)
       } else if (event === 'SHIRTS') {
         updateShirts(+args[0])
       } else if (event === 'SUPPORTERS') {

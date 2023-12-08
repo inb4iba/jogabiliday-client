@@ -4,14 +4,11 @@ import { useGoalsStore } from '@renderer/store/goalsStore'
 import { useGoalsListStore } from '@renderer/store/goalsListStore'
 
 export const GoalsList = (): JSX.Element => {
-  const [listSize, setListSize, nextGoalsAmount, setNextGoalsAmount, actualItemIdx] =
-    useGoalsListStore((state) => [
-      state.listSize,
-      state.updateListSize,
-      state.nextGoalsAmount,
-      state.updateNextGoalsAmount,
-      state.actualItemIdx
-    ])
+  const [listSize, nextGoalsAmount, actualItemIdx] = useGoalsListStore((state) => [
+    state.listSize,
+    state.nextGoalsAmount,
+    state.actualItemIdx
+  ])
   const [list, setList] = useState<Goal[]>()
   const goals = useGoalsStore((state) => state.goals)
 

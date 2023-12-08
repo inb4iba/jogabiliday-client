@@ -1,6 +1,6 @@
 export type WindowTitle = 'MAIN' | 'ORELO' | 'TIPA' | 'SHIRTS'
 
-type CustomizationData = {
+type CustomizationBarData = {
   bgColor: string
   fillColor: string
   width: number
@@ -10,6 +10,11 @@ type CustomizationData = {
   textSize: number
   valueSize: number
   textWeight: number
+}
+
+type CustomizationListData = {
+  nextGoalsAmount: number
+  listSize: number
 }
 
 type WindowApi = {
