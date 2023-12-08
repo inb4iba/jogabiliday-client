@@ -5,7 +5,7 @@ export const Supporters = (): JSX.Element => {
   const supporters = useSupportersStore((state) => state.supporters)
 
   return (
-    <section id="supporters" className="flex flex-col">
+    <section id="supporters" className="flex flex-col font-mono-rgo">
       <label id="label">APOIADORES</label>
       <span>{supporters}</span>
     </section>
