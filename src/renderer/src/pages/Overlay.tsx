@@ -8,6 +8,7 @@ import { useSupportersStore } from '@renderer/store/supportersStore'
 import { ws } from '@renderer/service/socket'
 import { useOreloStore } from '@renderer/store/oreloStore'
 import { useTipaStore } from '@renderer/store/tipaStore'
+import { useGoalsStore } from '@renderer/store/goalsStore'
 
 export const Overlay = (): JSX.Element => {
   const [
@@ -48,6 +49,7 @@ export const Overlay = (): JSX.Element => {
   const [oldOreloValue, setOldOreloValue, oldSupporters, setOldSupporters] = useOreloStore(
     (state) => [state.oldValue, state.setOldValue, state.oldSupporters, state.setOldSupporters]
   )
+  const updateGoals = useGoalsStore((state) => state.setGoals)
 
   useEffect(() => {
     ws.onmessage = (e): void => {
@@ -95,6 +97,9 @@ export const Overlay = (): JSX.Element => {
             updateShirtsFromSite(data)
             break
         }
+      } else if (event === 'GOALS') {
+        const goals = args[0] as Goal[]
+        updateGoals(goals)
       }
     }
   }, [])

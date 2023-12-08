@@ -1,5 +1,6 @@
 import { useGoalBarStore } from '@renderer/store/goalBarStore'
-import { useEffect, useRef } from 'react'
+import { useGoalsStore } from '@renderer/store/goalsStore'
+import { useEffect, useRef, useState } from 'react'
 
 export const GoalBar = (): JSX.Element => {
   const totalValueRef = useRef<HTMLSpanElement>(null)
@@ -10,9 +11,18 @@ export const GoalBar = (): JSX.Element => {
   const darkDescriptionRef = useRef<HTMLSpanElement>(null)
   const darkValueRef = useRef<HTMLSpanElement>(null)
 
+  const [actualGoal, setActualGoal] = useState<Goal>()
+  const [previousGoal, setPreviousGoal] = useState<Goal>()
+
   const totalValue = useGoalBarStore((state) => state.totalValue)
-  const goalValue = useGoalBarStore((state) => state.goalValue)
-  const previousValue = useGoalBarStore((state) => state.previousValue)
+  const [goalValue, updateGoalValue] = useGoalBarStore((state) => [
+    state.goalValue,
+    state.updateGoalValue
+  ])
+  const [previousValue, updatePreviousValue] = useGoalBarStore((state) => [
+    state.previousValue,
+    state.updatePreviousValue
+  ])
   const width = useGoalBarStore((state) => state.width)
   const height = useGoalBarStore((state) => state.height)
   const border = useGoalBarStore((state) => state.border)
@@ -23,6 +33,8 @@ export const GoalBar = (): JSX.Element => {
   const valueSize = useGoalBarStore((state) => state.valueSize)
   const paddingH = useGoalBarStore((state) => state.paddingH)
   const paddingV = useGoalBarStore((state) => state.paddingV)
+
+  const goals = useGoalsStore((state) => state.goals)
 
   useEffect(() => {
     if (barRef.current) {
@@ -52,9 +64,10 @@ export const GoalBar = (): JSX.Element => {
       darkValueRef.current.style.top = `${vCenter - border}px`
     }
     if (fillRef.current) {
-      const fillSize =
+      let fillSize =
         ((totalValue - previousValue) * width) / (goalValue - previousValue) - border * 2
-      fillRef.current.style.width = `${fillSize}px`
+      if (fillSize > width - border * 2) fillSize = width - border * 2
+      fillRef.current.style.width = `${fillSize > 0 ? fillSize : 0}px`
       fillRef.current.style.height = `${height - border * 2}px`
       fillRef.current.style.left = `${border}px`
       fillRef.current.style.top = `${border}px`
@@ -71,24 +84,48 @@ export const GoalBar = (): JSX.Element => {
     height,
     textSize,
     textWeight,
-    valueSize
+    valueSize,
+    totalValue,
+    goalValue,
+    previousValue,
+    goals
   ])
+
+  useEffect(() => {
+    if (!actualGoal) checkNextGoal()
+    else checkNextGoal(actualGoal.id)
+  }, [totalValue, goals])
+
+  useEffect(() => {
+    if (actualGoal && actualGoal.value) updateGoalValue(actualGoal.value)
+    if (previousGoal && previousGoal.value) updatePreviousValue(previousGoal.value)
+  }, [actualGoal, previousGoal])
+
+  const checkNextGoal = (id: number = 0): void => {
+    if (goals.length > id && goals[id].value) {
+      if (totalValue < goals[id].value!) {
+        setActualGoal(goals[id])
+        if (id > 0) setPreviousGoal(goals[id - 1])
+        else updatePreviousValue(0)
+      } else checkNextGoal(id + 1)
+    } else updateGoalValue(totalValue)
+  }
 
   return (
     <section id="goal-bar">
       <span id="total-value" ref={totalValueRef}>
         {totalValue}
       </span>
-      <div ref={barRef} className="relative">
+      <div ref={barRef} className="relative overflow-hidden">
         <span className="absolute z-10 whitespace-nowrap" ref={descriptionRef}>
-          Fazer coisa
+          {actualGoal?.title}
         </span>
         <span className="absolute z-10 whitespace-nowrap" ref={goalValueRef}>
           {goalValue}
         </span>
         <div className="relative overflow-hidden" ref={fillRef}>
           <span className="absolute z-10 whitespace-nowrap" ref={darkDescriptionRef}>
-            Fazer coisa
+            {actualGoal?.title}
           </span>
           <span className="absolute z-10 whitespace-nowrap" ref={darkValueRef}>
             {goalValue}
