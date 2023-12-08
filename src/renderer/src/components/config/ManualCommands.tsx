@@ -44,6 +44,16 @@ export const ManualCommands = (): JSX.Element => {
 
   const resetCache = (): void => {
     window.mainApi.resetCache()
+    const shirts = localStorage.getItem('jogabiliday_shirts')
+    const supporters = localStorage.getItem('jogabiliday_supporters')
+    const goalBar = localStorage.getItem('jogabiliday_goal_bar')
+
+    if (shirts) shirts['oldShirts'] = 0
+    if (supporters) supporters['oldSupporters'] = 0
+    if (goalBar) {
+      goalBar['totalValue'] = 0
+      goalBar['previousValue'] = 0
+    }
   }
 
   return (
