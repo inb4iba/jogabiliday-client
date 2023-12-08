@@ -8,6 +8,7 @@ type State = {
   fontWeight: number
   showLabel: boolean
   color: string
+  goal: number
 }
 
 type Action = {
@@ -17,6 +18,7 @@ type Action = {
   updateFontWeight: (value: number) => void
   updateShowLabel: (value: boolean) => void
   updateColor: (value: string) => void
+  updateGoal: (value: number) => void
 }
 
 export const useShirtsStore = create<State & Action>(
@@ -28,6 +30,7 @@ export const useShirtsStore = create<State & Action>(
       fontWeight: 400,
       showLabel: true,
       color: '#42FFEB',
+      goal: 20,
       updateShirts: (value): void =>
         set((state) => ({
           shirts: state.shirts + value
@@ -51,6 +54,10 @@ export const useShirtsStore = create<State & Action>(
       updateColor: (value): void =>
         set(() => ({
           color: value
+        })),
+      updateGoal: (value): void =>
+        set(() => ({
+          goal: value
         }))
     }),
     { name: 'jogabiliday_shirts' }

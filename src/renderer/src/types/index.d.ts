@@ -40,6 +40,7 @@ type CustomizationShirtData = {
   fontSize: number
   fontWeight: number
   showLabel: boolean
+  goal: number
 }
 
 type CustomizationSupportersData = {
@@ -47,6 +48,7 @@ type CustomizationSupportersData = {
   fontSize: number
   fontWeight: number
   showLabel: boolean
+  goal: number
 }
 
 interface Window {

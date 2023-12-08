@@ -8,30 +8,35 @@ export const SupportersConfig = (): JSX.Element => {
   const fontWeightRef = useRef<HTMLInputElement>(null)
   const showLabelRef = useRef<HTMLInputElement>(null)
   const colorRef = useRef<HTMLInputElement>(null)
+  const goalRef = useRef<HTMLInputElement>(null)
   const [
     fontSize,
     fontWeight,
     showLabel,
     color,
+    goal,
     updateFontSize,
     updateFontWeight,
     updateShowLabel,
-    updateColor
+    updateColor,
+    updateGoal
   ] = useSupportersStore((state) => [
     state.fontSize,
     state.fontWeight,
     state.showLabel,
     state.color,
+    state.goal,
     state.updateFontSize,
     state.updateFontWeight,
     state.updateShowLabel,
-    state.updateColor
+    state.updateColor,
+    state.updateGoal
   ])
   const [timeoutHandler, setTimeoutHandler] = useState<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    window.mainApi.customizeSupporters({ fontSize, fontWeight, showLabel, color })
-  }, [fontSize, fontWeight, showLabel, color])
+    window.mainApi.customizeSupporters({ fontSize, fontWeight, showLabel, color, goal })
+  }, [fontSize, fontWeight, showLabel, color, goal])
 
   const customizeShirts = (): void => {
     if (timeoutHandler) clearTimeout(timeoutHandler)
@@ -42,6 +47,9 @@ export const SupportersConfig = (): JSX.Element => {
       }
       if (fontWeightRef.current && !isNaN(+fontWeightRef.current.value)) {
         updateFontWeight(+fontWeightRef.current.value)
+      }
+      if (goalRef.current && !isNaN(+goalRef.current.value)) {
+        updateGoal(+goalRef.current.value)
       }
       if (showLabelRef.current) {
         updateShowLabel(showLabelRef.current.checked)
@@ -73,13 +81,20 @@ export const SupportersConfig = (): JSX.Element => {
       </div>
       <div className="flex justify-between gap-2">
         <Input type="color" label="Cor" onChange={customizeShirts} _ref={colorRef} value={color} />
-        <Checkbox
-          label="Mostrar label"
+        <Input
+          type="text"
+          label="Qntd para prenda"
           onChange={customizeShirts}
-          _ref={showLabelRef}
-          value={showLabel}
+          _ref={goalRef}
+          value={goal + ''}
         />
       </div>
+      <Checkbox
+        label="Mostrar label"
+        onChange={customizeShirts}
+        _ref={showLabelRef}
+        value={showLabel}
+      />
     </>
   )
 }

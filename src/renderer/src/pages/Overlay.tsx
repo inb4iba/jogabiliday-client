@@ -45,7 +45,8 @@ export const Overlay = (): JSX.Element => {
     updateShirtsColor,
     updateShirtsFontSize,
     updateShirtsFontWeight,
-    updateShirtsShowLabel
+    updateShirtsShowLabel,
+    updateShirtsGoal
   ] = useShirtsStore((state) => [
     state.updateShirts,
     state.oldShirts,
@@ -53,20 +54,25 @@ export const Overlay = (): JSX.Element => {
     state.updateColor,
     state.updateFontSize,
     state.updateFontWeight,
-    state.updateShowLabel
+    state.updateShowLabel,
+    state.updateGoal
   ])
   const [
     updateSupporters,
+    updateOldSupporters,
     updateSupportersColor,
     updateSupportersFontSize,
     updateSupportersFontWeight,
-    updateSupportersShowLabel
+    updateSupportersShowLabel,
+    updateSupportersGoal
   ] = useSupportersStore((state) => [
     state.updateSupporters,
+    state.updateOldSupporters,
     state.updateColor,
     state.updateFontSize,
     state.updateFontWeight,
-    state.updateShowLabel
+    state.updateShowLabel,
+    state.updateGoal
   ])
   const [oldTipaValue, setOldTipaValue] = useTipaStore((state) => [
     state.oldValue,
@@ -81,6 +87,10 @@ export const Overlay = (): JSX.Element => {
     state.updateListSize,
     state.updateNextGoalsAmount
   ])
+
+  useEffect(() => {
+    updateOldSupporters(oldSupporters)
+  }, [oldSupporters])
 
   useEffect(() => {
     ws.onmessage = (e): void => {
@@ -114,18 +124,21 @@ export const Overlay = (): JSX.Element => {
         updateNextGoalsAmount(nextGoalsAmount)
       } else if (event === 'CUSTOMIZATION:SHIRTS') {
         console.log('shirts', args[0])
-        const { color, fontSize, fontWeight, showLabel } = args[0] as CustomizationShirtData
+        const { color, fontSize, fontWeight, showLabel, goal } = args[0] as CustomizationShirtData
         updateShirtsColor(color)
         updateShirtsFontSize(fontSize)
         updateShirtsFontWeight(fontWeight)
         updateShirtsShowLabel(showLabel)
+        updateShirtsGoal(goal)
       } else if (event === 'CUSTOMIZATION:SUPPORTERS') {
         console.log('supporters', args[0])
-        const { color, fontSize, fontWeight, showLabel } = args[0] as CustomizationSupportersData
+        const { color, fontSize, fontWeight, showLabel, goal } =
+          args[0] as CustomizationSupportersData
         updateSupportersColor(color)
         updateSupportersFontSize(fontSize)
         updateSupportersFontWeight(fontWeight)
         updateSupportersShowLabel(showLabel)
+        updateSupportersGoal(goal)
       } else if (event === 'SHIRTS') {
         updateShirts(+args[0])
       } else if (event === 'SUPPORTERS') {
