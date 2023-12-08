@@ -30,7 +30,7 @@ export const GoalsList = (): JSX.Element => {
   }
 
   return (
-    <section className="absolute flex flex-col justify-end w-1/4 gap-1 overflow-hidden right-32 top-1/2">
+    <section className="absolute flex flex-col justify-end w-1/4 gap-1 overflow-hidden font-medium right-32 top-1/2 font-futura font-condensed">
       {list ? (
         list.map((goal) => {
           if (goal.title && goal.value)
