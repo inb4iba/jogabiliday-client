@@ -15,6 +15,6 @@ export const useTipaStore = create<State & Action>(
       oldValue: 0,
       setOldValue: (value): void => set(() => ({ oldValue: value }))
     }),
-    { name: 'jogabiliday_orelo' }
+    { name: 'jogabiliday_tipa' }
   )
 )

@@ -1,4 +1,5 @@
 import { useGoalBarStore } from '@renderer/store/goalBarStore'
+import { useGoalsListStore } from '@renderer/store/goalsListStore'
 import { useGoalsStore } from '@renderer/store/goalsStore'
 import { useEffect, useRef, useState } from 'react'
 
@@ -35,6 +36,7 @@ export const GoalBar = (): JSX.Element => {
   const paddingV = useGoalBarStore((state) => state.paddingV)
 
   const goals = useGoalsStore((state) => state.goals)
+  const setActualGoalIdx = useGoalsListStore((state) => state.updateActualItemIdx)
 
   useEffect(() => {
     if (barRef.current) {
@@ -103,10 +105,14 @@ export const GoalBar = (): JSX.Element => {
     if (goals.length > id && goals[id].value) {
       if (totalValue < goals[id].value!) {
         setActualGoal(goals[id])
+        setActualGoalIdx(id)
         if (id > 0) setPreviousGoal(goals[id - 1])
         else updatePreviousValue(0)
       } else checkNextGoal(id + 1)
-    } else updateGoalValue(totalValue)
+    } else {
+      updateGoalValue(totalValue)
+      setActualGoalIdx(goals.length)
+    }
   }
 
   return (

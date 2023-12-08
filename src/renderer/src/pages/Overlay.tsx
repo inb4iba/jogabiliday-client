@@ -9,6 +9,7 @@ import { ws } from '@renderer/service/socket'
 import { useOreloStore } from '@renderer/store/oreloStore'
 import { useTipaStore } from '@renderer/store/tipaStore'
 import { useGoalsStore } from '@renderer/store/goalsStore'
+import { GoalsList } from '@renderer/components/overlay/GoalsList'
 
 export const Overlay = (): JSX.Element => {
   const [
@@ -139,10 +140,11 @@ export const Overlay = (): JSX.Element => {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="relative flex flex-col w-full h-screen gap-6 p-6">
       <GoalBar />
       <Supporters />
       <Shirts />
+      <GoalsList />
     </div>
   )
 }
