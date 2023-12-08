@@ -18,6 +18,7 @@ export const sendMessage = async (
   event:
     | 'VALUE'
     | 'CUSTOMIZATION:BAR'
+    | 'CUSTOMIZATION:GENERIC_BAR'
     | 'CUSTOMIZATION:LIST'
     | 'CUSTOMIZATION:SHIRTS'
     | 'CUSTOMIZATION:SUPPORTERS'

@@ -58,6 +58,9 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('customize_bar', (_e, data: CustomizationBarData) => {
     sendMessage('CUSTOMIZATION:BAR', data)
   })
+  ipcMain.on('customize_generic_bar', (_e, data: CustomizationGenericBarData) => {
+    sendMessage('CUSTOMIZATION:GENERIC_BAR', data)
+  })
   ipcMain.on('customize_list', (_e, data: CustomizationListData) => {
     sendMessage('CUSTOMIZATION:LIST', data)
   })

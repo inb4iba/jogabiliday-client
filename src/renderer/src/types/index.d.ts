@@ -30,6 +30,17 @@ type CustomizationBarData = {
   textWeight: number
 }
 
+type CustomizationGenericBarData = {
+  bgColor: string
+  fillColor: string
+  width: number
+  height: number
+  border: number
+  paddingH: number
+  valueSize: number
+  textWeight: number
+}
+
 type CustomizationListData = {
   nextGoalsAmount: number
   listSize: number
@@ -75,6 +86,7 @@ interface Window {
     startServer: ({ oreloId: string }) => Promise<Data>
     stopServer: () => Promise<Data>
     customizeBar: (data: CustomizationBarData) => void
+    customizeGenericBar: (data: CustomizationGenericBarData) => void
     customizeList: (data: CustomizationListData) => void
     customizeShirt: (data: CustomizationShirtData) => void
     customizeSupporters: (data: CustomizationSupportersData) => void

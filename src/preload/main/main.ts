@@ -27,6 +27,8 @@ export const mainApi = {
     ipcRenderer.invoke('start_server', data),
   stopServer: (): Promise<string> => ipcRenderer.invoke('stop_server'),
   customizeBar: (data: CustomizationBarData): void => ipcRenderer.send('customize_bar', data),
+  customizeGenericBar: (data: CustomizationGenericBarData): void =>
+    ipcRenderer.send('customize_generic_bar', data),
   customizeList: (data: CustomizationListData): void => ipcRenderer.send('customize_list', data),
   customizeShirt: (data: CustomizationShirtData): void =>
     ipcRenderer.send('customize_shirts', data),

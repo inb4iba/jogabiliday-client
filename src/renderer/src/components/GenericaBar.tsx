@@ -1,4 +1,4 @@
-import { useGoalBarStore } from '@renderer/store/goalBarStore'
+import { useGenericBarStore } from '@renderer/store/genericBarStore'
 import { JSX, useEffect, useRef } from 'react'
 
 type Props = {
@@ -12,14 +12,14 @@ export const GenericBar = ({ totalValue, goalValue }: Props): JSX.Element => {
   const fillRef = useRef<HTMLDivElement>(null)
   const darkValueRef = useRef<HTMLSpanElement>(null)
 
-  const width = useGoalBarStore((state) => state.width)
-  const height = useGoalBarStore((state) => state.height)
-  const border = useGoalBarStore((state) => state.border)
-  const fillColor = useGoalBarStore((state) => state.fillColor)
-  const bgColor = useGoalBarStore((state) => state.bgColor)
-  const textWeight = useGoalBarStore((state) => state.textWeight)
-  const valueSize = useGoalBarStore((state) => state.valueSize)
-  const paddingH = useGoalBarStore((state) => state.paddingH)
+  const width = useGenericBarStore((state) => state.width)
+  const height = useGenericBarStore((state) => state.height)
+  const border = useGenericBarStore((state) => state.border)
+  const fillColor = useGenericBarStore((state) => state.fillColor)
+  const bgColor = useGenericBarStore((state) => state.bgColor)
+  const textWeight = useGenericBarStore((state) => state.textWeight)
+  const valueSize = useGenericBarStore((state) => state.valueSize)
+  const paddingH = useGenericBarStore((state) => state.paddingH)
 
   useEffect(() => {
     if (barRef.current) {

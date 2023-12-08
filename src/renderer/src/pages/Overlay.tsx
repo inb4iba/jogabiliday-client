@@ -11,6 +11,7 @@ import { useTipaStore } from '@renderer/store/tipaStore'
 import { useGoalsStore } from '@renderer/store/goalsStore'
 import { GoalsList } from '@renderer/components/overlay/GoalsList'
 import { useGoalsListStore } from '@renderer/store/goalsListStore'
+import { useGenericBarStore } from '@renderer/store/genericBarStore'
 
 export const Overlay = (): JSX.Element => {
   const [
@@ -37,6 +38,25 @@ export const Overlay = (): JSX.Element => {
     state.updateTextSize,
     state.updateTextWeight,
     state.updateTotalValue
+  ])
+  const [
+    updateGenericBgColor,
+    updateGenericFillColor,
+    updateGenericWidth,
+    updateGenericHeight,
+    updateGenericBorder,
+    updateGenericPaddingH,
+    updateGenericValueSize,
+    updateGenericTextWeight
+  ] = useGenericBarStore((state) => [
+    state.updateBgColor,
+    state.updateFillColor,
+    state.updateWidth,
+    state.updateHeight,
+    state.updateBorder,
+    state.updatePaddingH,
+    state.updateValueSize,
+    state.updateTextWeight
   ])
   const [
     updateShirts,
@@ -118,6 +138,18 @@ export const Overlay = (): JSX.Element => {
         updateTextWeight(textWeight)
         updateValueSize(valueSize)
         updateWidth(width)
+      } else if (event === 'CUSTOMIZATION:GENERIC_BAR') {
+        console.log('custom generic', args[0])
+        const { bgColor, fillColor, width, height, border, paddingH, valueSize, textWeight } =
+          args[0]
+        updateGenericBgColor(bgColor)
+        updateGenericFillColor(fillColor)
+        updateGenericBorder(border)
+        updateGenericHeight(height)
+        updateGenericPaddingH(paddingH)
+        updateGenericTextWeight(textWeight)
+        updateGenericValueSize(valueSize)
+        updateGenericWidth(width)
       } else if (event === 'CUSTOMIZATION:LIST') {
         const { listSize, nextGoalsAmount } = args[0] as CustomizationListData
         updateListSize(listSize)
