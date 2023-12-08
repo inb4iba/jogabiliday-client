@@ -19,7 +19,7 @@ export const GoalItem = (props: Props): JSX.Element => {
           props.complete ? 'justify-center text-yellow-300' : 'justify-end text-green-300'
         }`}
       >
-        <p className="flex items-end font-bold">
+        <p className="flex items-end font-bold goal-black-rect">
           {!props.complete && <span className="text-xs -translate-y-1">R$</span>}
           {props.complete ? 'Batida!' : props.value}
         </p>
