@@ -17,7 +17,7 @@ type Goal = {
   value?: number
 }
 
-type CustomizationData = {
+type CustomizationBarData = {
   bgColor: string
   fillColor: string
   width: number
@@ -28,6 +28,11 @@ type CustomizationData = {
   textSize: number
   valueSize: number
   textWeight: number
+}
+
+type CustomizationListData = {
+  nextGoalsAmount: number
+  listSize: number
 }
 
 interface Window {
@@ -53,7 +58,8 @@ interface Window {
     onTipaHide: (callback: () => void) => void
     startServer: ({ oreloId: string }) => Promise<Data>
     stopServer: () => Promise<Data>
-    customizeBar: (data: CustomizationData) => void
+    customizeBar: (data: CustomizationBarData) => void
+    customizeList: (data: CustomizationListData) => void
     updateShirts: (data: number) => void
     updateSupporters: (data: number) => void
     updateTotalValue: (data: ValueData) => void

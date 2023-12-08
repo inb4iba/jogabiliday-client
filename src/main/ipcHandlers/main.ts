@@ -1,7 +1,7 @@
 import { ipcMain } from 'electron'
 import { closeOrelo, hideOrelo, openOrelo, showOrelo } from '../scrapingWindows/orelo'
 import { startServer, stopServer } from '..'
-import { CustomizationData, Data, ValueData } from '../types/types'
+import { CustomizationListData, Data, ValueData } from '../types/types'
 import { closeTipa, hideTipa, openTipa, showTipa } from '../scrapingWindows/tipa'
 import { sendMessage } from '../server'
 import { closeShirts, hideShirts, openShirts, showShirts } from '../scrapingWindows/shirts'
@@ -55,8 +55,11 @@ export const initializeMainHandler = (): void => {
   ipcMain.on('tipa_data', (_e, data: ValueData) => {
     sendMessage('VALUE', data)
   })
-  ipcMain.on('customize_bar', (_e, data: CustomizationData) => {
-    sendMessage('CUSTOMIZATION', data)
+  ipcMain.on('customize_bar', (_e, data: CustomizationBarData) => {
+    sendMessage('CUSTOMIZATION:BAR', data)
+  })
+  ipcMain.on('customize_list', (_e, data: CustomizationListData) => {
+    sendMessage('CUSTOMIZATION:LIST', data)
   })
   ipcMain.on('update_shirts', (_e, data: number) => {
     sendMessage('SHIRTS', data)

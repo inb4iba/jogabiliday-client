@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .font-condensed {
+    font-stretch: condensed;
+  }
+}
+
 .draggable {
   -webkit-app-region: drag;
 }
@@ -12,6 +18,27 @@
 
 .spinner {
   animation: spin 2s linear infinite;
+}
+
+.shared-gradient {
+  background-image: radial-gradient(
+    ellipse,
+    rgb(72, 255, 130) 20%,
+    rgb(110, 253, 191) 60%,
+    rgb(78, 255, 220) 85%
+  );
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.complete {
+  background-image: radial-gradient(
+    ellipse,
+    rgba(255, 248, 107, 1) 20%,
+    rgb(255, 211, 36) 60%,
+    rgb(250, 222, 85) 85%
+  );
 }
 
 ::-webkit-scrollbar {
