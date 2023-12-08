@@ -37,7 +37,6 @@ export const GoalBar = (): JSX.Element => {
   const goals = useGoalsStore((state) => state.goals)
 
   useEffect(() => {
-    console.log(previousValue)
     if (barRef.current) {
       barRef.current.style.width = `${width}px`
       barRef.current.style.height = `${height}px`
