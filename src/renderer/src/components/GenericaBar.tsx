@@ -22,10 +22,7 @@ export const GenericBar = ({ totalValue, goalValue }: Props): JSX.Element => {
   const paddingH = useGenericBarStore((state) => state.paddingH)
 
   useEffect(() => {
-    console.log('aqui')
-
     if (barRef.current) {
-      console.log('aqui 2', width)
       barRef.current.style.width = `${width}px`
       barRef.current.style.height = `${height}px`
       barRef.current.style.fontWeight = textWeight + ''

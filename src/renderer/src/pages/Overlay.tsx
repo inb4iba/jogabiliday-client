@@ -25,7 +25,9 @@ export const Overlay = (): JSX.Element => {
     updateValueSize,
     updateTextSize,
     updateTextWeight,
-    updateTotalValue
+    updateTotalValue,
+    customValue,
+    addCustomValue
   ] = useGoalBarStore((state) => [
     state.updateBgColor,
     state.updateFillColor,
@@ -37,7 +39,9 @@ export const Overlay = (): JSX.Element => {
     state.updateValueSize,
     state.updateTextSize,
     state.updateTextWeight,
-    state.updateTotalValue
+    state.updateTotalValue,
+    state.customValue,
+    state.addCustomValue
   ])
   const [
     updateGenericBgColor,
@@ -110,7 +114,8 @@ export const Overlay = (): JSX.Element => {
 
   useEffect(() => {
     updateOldSupporters(oldSupporters)
-  }, [oldSupporters])
+    updateTotalValue(oldTipaValue + oldOreloValue + customValue)
+  }, [oldSupporters, oldTipaValue, oldOreloValue, customValue])
 
   useEffect(() => {
     ws.onmessage = (e): void => {
@@ -139,7 +144,6 @@ export const Overlay = (): JSX.Element => {
         updateValueSize(valueSize)
         updateWidth(width)
       } else if (event === 'CUSTOMIZATION:GENERIC_BAR') {
-        console.log('custom generic', args[0])
         const { bgColor, fillColor, width, height, border, paddingH, valueSize, textWeight } =
           args[0]
         updateGenericBgColor(bgColor)
@@ -155,7 +159,6 @@ export const Overlay = (): JSX.Element => {
         updateListSize(listSize)
         updateNextGoalsAmount(nextGoalsAmount)
       } else if (event === 'CUSTOMIZATION:SHIRTS') {
-        console.log('shirts', args[0])
         const { color, fontSize, fontWeight, showLabel, goal } = args[0] as CustomizationShirtData
         updateShirtsColor(color)
         updateShirtsFontSize(fontSize)
@@ -163,7 +166,6 @@ export const Overlay = (): JSX.Element => {
         updateShirtsShowLabel(showLabel)
         updateShirtsGoal(goal)
       } else if (event === 'CUSTOMIZATION:SUPPORTERS') {
-        console.log('supporters', args[0])
         const { color, fontSize, fontWeight, showLabel, goal } =
           args[0] as CustomizationSupportersData
         updateSupportersColor(color)
@@ -201,34 +203,24 @@ export const Overlay = (): JSX.Element => {
   }, [])
 
   const addValue = (value: number): void => {
-    updateTotalValue(value)
+    addCustomValue(value)
   }
 
   const updateOrelo = (data: ValueData): void => {
     const value = +data.value.replace('R$', '').trim().replace('.', '').replace(',', '.')
     const supporters = data.supporters ? +data.supporters : 0
-    if (oldOreloValue !== value) {
-      updateTotalValue(oldOreloValue - value)
-      setOldOreloValue(value)
-    }
-    if (oldSupporters !== supporters) {
-      console.log(oldSupporters, supporters)
-      updateSupporters(oldSupporters - supporters)
-      setOldSupporters(supporters)
-    }
+    setOldOreloValue(value)
+    setOldSupporters(supporters)
   }
 
-  const updateTipa = (data: ValueData): void => {
+  const updateTipa = async (data: ValueData): Promise<void> => {
     const value = +data.value.replace('R$', '').trim().replace('.', '').replace(',', '.')
-    if (oldTipaValue !== value) {
-      updateTotalValue(oldTipaValue - value)
-      setOldTipaValue(value)
-    }
+    setOldTipaValue(value)
   }
 
   const updateShirtsFromSite = (data: ValueData): void => {
-    console.log(data)
     const value = +data.value
+    console.log(oldShirts, value)
     if (oldShirts !== value) {
       updateOldShirts(value)
     }

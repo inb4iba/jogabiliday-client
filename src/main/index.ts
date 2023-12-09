@@ -12,7 +12,7 @@ import 'dotenv/config'
 import { checkShirtsErrors, startShirtsScraping } from './scrapingWindows/shirts'
 
 let mainWindow: BrowserWindow
-let activeSites: { orelo: boolean; tipa: boolean; shirts: boolean }
+let activeSites = { orelo: true, tipa: true, shirts: true }
 
 export const sendHideWindow = (title: WindowTitle): void => {
   mainWindow.webContents.send(`on_${title.toLowerCase()}_hide`)
