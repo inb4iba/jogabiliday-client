@@ -20,6 +20,7 @@ export const Supporters = (): JSX.Element => {
       textRef.current.style.fontSize = `${fontSize}px`
       textRef.current.style.fontWeight = fontWeight + ''
       textRef.current.style.color = color
+      console.log(oldSupporters, goal)
     }
   }, [color, fontSize, fontWeight])
 
@@ -27,7 +28,7 @@ export const Supporters = (): JSX.Element => {
     <section id="supporters" className="flex gap-6 font-mono-rgo">
       <div className="flex flex-col">
         {showLabel && <label id="label">APOIADORES</label>}
-        <span ref={textRef}>{Math.floor(oldSupporters / goal) + supporters}</span>
+        <span ref={textRef}>{(Math.floor((oldSupporters - 700) / goal) + supporters) * -1}</span>
       </div>
       <GenericBar goalValue={goal} totalValue={oldSupporters} />
     </section>

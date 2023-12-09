@@ -128,7 +128,8 @@ export const GoalBar = (): JSX.Element => {
           {actualGoal?.title}
         </span>
         <span className="absolute z-10 whitespace-nowrap" ref={goalValueRef}>
-          {goalValue}
+          <span className="text-sm font-bold">R$</span>
+          {totalValue.toFixed(2)}
         </span>
         <div className="relative overflow-hidden" ref={fillRef}>
           <span
@@ -138,7 +139,8 @@ export const GoalBar = (): JSX.Element => {
             {actualGoal?.title}
           </span>
           <span className="absolute z-10 whitespace-nowrap" ref={darkValueRef}>
-            {goalValue}
+            <span className="text-sm font-bold">R$</span>
+            {totalValue.toFixed(2)}
           </span>
         </div>
       </div>
